@@ -1,0 +1,95 @@
+module Lab
+
+go 1.24.0
+
+toolchain go1.24.5
+
+require (
+	github.com/IBM/sarama v1.46.3 // indirect
+	github.com/PuerkitoBio/goquery v1.10.3 // indirect
+	github.com/andybalholm/brotli v1.0.6 // indirect
+	github.com/andybalholm/cascadia v1.3.3 // indirect
+	github.com/btcsuite/btcutil v1.0.2 // indirect
+	github.com/bwmarrin/snowflake v0.3.0 // indirect
+	github.com/chromedp/cdproto v0.0.0-20250803210736-d308e07a266d // indirect
+	github.com/chromedp/chromedp v0.14.1 // indirect
+	github.com/chromedp/sysutil v1.1.0 // indirect
+	github.com/davecgh/go-spew v1.1.1 // indirect
+	github.com/daviddengcn/go-colortext v1.0.0 // indirect
+	github.com/deckarep/golang-set/v2 v2.8.0 // indirect
+	github.com/dixonwille/wmenu v4.0.2+incompatible // indirect
+	github.com/dsnet/compress v0.0.2-0.20210315054119-f66993602bf5 // indirect
+	github.com/eapache/go-resiliency v1.7.0 // indirect
+	github.com/eapache/go-xerial-snappy v0.0.0-20230731223053-c322873962e3 // indirect
+	github.com/eapache/queue v1.1.0 // indirect
+	github.com/gabriel-vasile/mimetype v1.4.8 // indirect
+	github.com/gdamore/encoding v1.0.1 // indirect
+	github.com/gdamore/tcell/v2 v2.8.1 // indirect
+	github.com/go-jose/go-jose/v3 v3.0.4 // indirect
+	github.com/go-json-experiment/json v0.0.0-20250725192818-e39067aee2d2 // indirect
+	github.com/go-stack/stack v1.8.1 // indirect
+	github.com/gobwas/httphead v0.1.0 // indirect
+	github.com/gobwas/pool v0.2.1 // indirect
+	github.com/gobwas/ws v1.4.0 // indirect
+	github.com/golang/snappy v0.0.4 // indirect
+	github.com/gorilla/i18n v0.0.0-20150820051429-8b358169da46 // indirect
+	github.com/gorilla/websocket v1.5.3 // indirect
+	github.com/guptarohit/asciigraph v0.7.2 // indirect
+	github.com/hashicorp/go-uuid v1.0.3 // indirect
+	github.com/jcmturner/aescts/v2 v2.0.0 // indirect
+	github.com/jcmturner/dnsutils/v2 v2.0.0 // indirect
+	github.com/jcmturner/gofork v1.7.6 // indirect
+	github.com/jcmturner/gokrb5/v8 v8.4.4 // indirect
+	github.com/jcmturner/rpc/v2 v2.0.3 // indirect
+	github.com/json-iterator/go v1.1.12 // indirect
+	github.com/klauspost/compress v1.18.1 // indirect
+	github.com/klauspost/pgzip v1.2.5 // indirect
+	github.com/lib/pq v1.10.9 // indirect
+	github.com/logrusorgru/aurora v2.0.3+incompatible // indirect
+	github.com/lucasb-eyer/go-colorful v1.2.0 // indirect
+	github.com/mattn/go-isatty v0.0.20 // indirect
+	github.com/mattn/go-runewidth v0.0.16 // indirect
+	github.com/mattn/go-sqlite3 v1.14.24 // indirect
+	github.com/mholt/archiver/v3 v3.5.1 // indirect
+	github.com/mitchellh/colorstring v0.0.0-20190213212951-d06e56a500db // indirect
+	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
+	github.com/modern-go/reflect2 v1.0.2 // indirect
+	github.com/nwaples/rardecode v1.1.3 // indirect
+	github.com/pebbe/zmq4 v1.2.11 // indirect
+	github.com/pierrec/lz4/v4 v4.1.22 // indirect
+	github.com/playwright-community/playwright-go v0.5700.1 // indirect
+	github.com/pmezard/go-difflib v1.0.0 // indirect
+	github.com/projectdiscovery/gologger v1.1.33 // indirect
+	github.com/projectdiscovery/utils v0.2.19 // indirect
+	github.com/rcrowley/go-metrics v0.0.0-20250401214520-65e299d6c5c9 // indirect
+	github.com/rivo/tview v0.0.0-20241227133733-17b7edb88c57 // indirect
+	github.com/rivo/uniseg v0.4.7 // indirect
+	github.com/schollz/progressbar/v3 v3.18.0 // indirect
+	github.com/shopspring/decimal v1.4.0 // indirect
+	github.com/sirupsen/logrus v1.9.3 // indirect
+	github.com/slack-go/slack v0.15.0 // indirect
+	github.com/stretchr/testify v1.11.1 // indirect
+	github.com/ulikunitz/xz v0.5.11 // indirect
+	github.com/unidoc/freetype v0.2.3 // indirect
+	github.com/unidoc/pkcs7 v0.2.0 // indirect
+	github.com/unidoc/timestamp v0.0.0-20200412005513-91597fd3793a // indirect
+	github.com/unidoc/unichart v0.4.0 // indirect
+	github.com/unidoc/unipdf/v3 v3.69.0 // indirect
+	github.com/unidoc/unitype v0.5.1 // indirect
+	github.com/xi2/xz v0.0.0-20171230120015-48954b6210f8 // indirect
+	go.uber.org/multierr v1.11.0 // indirect
+	go.uber.org/zap v1.27.0 // indirect
+	golang.org/x/crypto v0.43.0 // indirect
+	golang.org/x/exp v0.0.0-20241004190924-225e2abe05e6 // indirect
+	golang.org/x/image v0.24.0 // indirect
+	golang.org/x/net v0.46.0 // indirect
+	golang.org/x/sys v0.37.0 // indirect
+	golang.org/x/term v0.36.0 // indirect
+	golang.org/x/text v0.30.0 // indirect
+	golang.org/x/xerrors v0.0.0-20240903120638-7835f813f4da // indirect
+	gonum.org/v1/gonum v0.15.1 // indirect
+	gopkg.in/dixonwille/wlog.v2 v2.0.0 // indirect
+	gopkg.in/djherbis/times.v1 v1.3.0 // indirect
+	gopkg.in/natefinch/lumberjack.v2 v2.2.1 // indirect
+	gopkg.in/yaml.v3 v3.0.1 // indirect
+)

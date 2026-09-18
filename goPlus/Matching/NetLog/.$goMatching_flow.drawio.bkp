@@ -1,0 +1,1539 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.1.2 Chrome/138.0.7204.243 Electron/37.4.0 Safari/537.36" version="28.1.2" pages="7">
+  <diagram name="goMatching 아키텍처" id="O7nctoMkiy_pREdUlFyt">
+    <mxGraphModel dx="1710" dy="959" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="xIDQLF7F-7SVXorRrshn-1" value="goMatching Process  (Matching/NetLog)" style="rounded=1;whiteSpace=wrap;html=1;                  fillColor=#dae8fc;strokeColor=#FFFFFF;                  fontSize=14;fontStyle=1;verticalAlign=top;opacity=25;strokeWidth=5;dashed=1;labelBackgroundColor=none;fillColor=#182E3E;fontColor=#000000;fontSize=17;" vertex="1" parent="1">
+          <mxGeometry x="70" y="40" width="680" height="630" as="geometry" />
+        </mxCell>
+        <mxCell id="xIDQLF7F-7SVXorRrshn-2" value="BEFOREMATCHING Proxy&#xa;(ZMQ SUB · 주문 수신)" style="rounded=1;whiteSpace=wrap;html=1;                  fillColor=#f8cecc;strokeColor=#3A5431;fontStyle=1;labelBackgroundColor=none;fillColor=#6d8764;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="70" y="840" width="170" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="xIDQLF7F-7SVXorRrshn-3" value="EXTRAINFOR&#xa;(ZMQ SUB · 제어)" style="rounded=1;whiteSpace=wrap;html=1;                  fillColor=#f8cecc;strokeColor=#432D57;labelBackgroundColor=none;fillColor=#76608a;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="50" y="930" width="170" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="xIDQLF7F-7SVXorRrshn-4" value="goMatchingCtl&#xa;(TCP · NValue)" style="rounded=1;whiteSpace=wrap;html=1;                  fillColor=#f8cecc;strokeColor=#432D57;labelBackgroundColor=none;fillColor=#76608a;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="90" y="730" width="170" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="xIDQLF7F-7SVXorRrshn-5" value="AFTERMATCHING Proxy&#xa;(ZMQ PUB → goAfterMatch)" style="rounded=1;whiteSpace=wrap;html=1;                  fillColor=#d5e8d4;strokeColor=#3A5431;fontStyle=1;labelBackgroundColor=none;fillColor=#6d8764;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="640" y="740" width="180" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="xIDQLF7F-7SVXorRrshn-6" value="SISEJSON Proxy&#xa;(ZMQ PUB → 클라이언트)" style="rounded=1;whiteSpace=wrap;html=1;                  fillColor=#d5e8d4;strokeColor=#3A5431;labelBackgroundColor=none;fillColor=#6d8764;fontColor=#ffffff;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="467" y="860" width="180" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="xIDQLF7F-7SVXorRrshn-7" value="ORDERPASS Proxy&#xa;(PAUSE 신호 전송)" style="rounded=1;whiteSpace=wrap;html=1;                  fillColor=#d5e8d4;strokeColor=#3A5431;labelBackgroundColor=none;fillColor=#6d8764;fontColor=#ffffff;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="320" y="730" width="180" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="xIDQLF7F-7SVXorRrshn-8" value="goMatching (main)&#xa;초기화 / InnerProxy 생성&#xa;각 고루틴 시작" style="rounded=1;whiteSpace=wrap;html=1;                  fillColor=#fff2cc;strokeColor=#FFFFFF;                  fontStyle=1;fontSize=11;labelBackgroundColor=none;fillColor=#182E3E;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="300" y="100" width="150" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="xIDQLF7F-7SVXorRrshn-9" value="InnerProxy&#xa;(inproc:// PUB/SUB Hub)" style="ellipse;whiteSpace=wrap;html=1;                  fillColor=#f0a30a;strokeColor=#B09500;                  fontStyle=1;fontSize=11;labelBackgroundColor=none;fillColor=#e3c800;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="390" y="350" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="xIDQLF7F-7SVXorRrshn-10" value="gofCoinMatching&#xa;(코인당 1 고루틴)&#xa;주문 수신 → 매칭 → 체결 PUB" style="rounded=1;whiteSpace=wrap;html=1;                  fillColor=#e1d5e7;strokeColor=#FFFFFF;fontSize=11;labelBackgroundColor=none;fillColor=#182E3E;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="133" y="335" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="xIDQLF7F-7SVXorRrshn-11" value="gofAfterFunction&#xa;체결 후처리 / DB 전송" style="rounded=1;whiteSpace=wrap;html=1;                  fillColor=#e1d5e7;strokeColor=#FFFFFF;fontSize=11;labelBackgroundColor=none;fillColor=#182E3E;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="540" y="210" width="129" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="xIDQLF7F-7SVXorRrshn-12" value="gofSiseFunction&#xa;현재가 / 호가 전송" style="rounded=1;whiteSpace=wrap;html=1;                  fillColor=#e1d5e7;strokeColor=#FFFFFF;fontSize=11;labelBackgroundColor=none;fillColor=#182E3E;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="590" y="355" width="129" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="xIDQLF7F-7SVXorRrshn-13" value="gofFdsFunction&#xa;FDS 데이터 처리" style="rounded=1;whiteSpace=wrap;html=1;                  fillColor=#e1d5e7;strokeColor=#FFFFFF;fontSize=11;labelBackgroundColor=none;fillColor=#182E3E;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="560" y="515" width="129" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="xIDQLF7F-7SVXorRrshn-14" value="goCheckDate&#xa;10초마다 일자 변경 체크" style="rounded=1;whiteSpace=wrap;html=1;                  fillColor=#e1d5e7;strokeColor=#FFFFFF;fontSize=11;labelBackgroundColor=none;fillColor=#182E3E;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="313" y="240" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="xIDQLF7F-7SVXorRrshn-15" value="ControlHandler&#xa;RECONNECT / RELOAD / REPORT" style="rounded=1;whiteSpace=wrap;html=1;                  fillColor=#e1d5e7;strokeColor=#FFFFFF;fontSize=11;labelBackgroundColor=none;fillColor=#182E3E;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="133" y="180" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="xIDQLF7F-7SVXorRrshn-16" value="MatchingCtlHandler&#xa;NValue 수신 / 연결 끊김 → PAUSE" style="rounded=1;whiteSpace=wrap;html=1;                  fillColor=#e1d5e7;strokeColor=#FFFFFF;fontSize=11;labelBackgroundColor=none;fillColor=#182E3E;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="133" y="515" width="180" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="xIDQLF7F-7SVXorRrshn-17" value="go" style="edgeStyle=orthogonalEdgeStyle;dashed=1;                  endArrow=open;endFill=0;strokeColor=#23445D;labelBackgroundColor=none;fontColor=default;" edge="1" parent="1" source="xIDQLF7F-7SVXorRrshn-8" target="xIDQLF7F-7SVXorRrshn-15">
+          <mxGeometry x="0.6922" relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="220" y="130" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xIDQLF7F-7SVXorRrshn-18" value="go (×N)" style="edgeStyle=orthogonalEdgeStyle;dashed=1;                  endArrow=open;endFill=0;strokeColor=#23445D;labelBackgroundColor=none;fontColor=default;" edge="1" parent="1" source="xIDQLF7F-7SVXorRrshn-8" target="xIDQLF7F-7SVXorRrshn-10">
+          <mxGeometry x="0.8072" relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="200" y="130" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xIDQLF7F-7SVXorRrshn-19" value="go" style="edgeStyle=orthogonalEdgeStyle;dashed=1;                  endArrow=open;endFill=0;strokeColor=#23445D;labelBackgroundColor=none;fontColor=default;" edge="1" parent="1" source="xIDQLF7F-7SVXorRrshn-8" target="xIDQLF7F-7SVXorRrshn-16">
+          <mxGeometry x="-0.4059" relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="180" y="130" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xIDQLF7F-7SVXorRrshn-20" value="go" style="edgeStyle=orthogonalEdgeStyle;dashed=1;                  endArrow=open;endFill=0;strokeColor=#23445D;labelBackgroundColor=none;fontColor=default;entryX=0.223;entryY=-0.019;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="xIDQLF7F-7SVXorRrshn-8" target="xIDQLF7F-7SVXorRrshn-11">
+          <mxGeometry x="0.6428" y="-5" relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="570" y="190" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xIDQLF7F-7SVXorRrshn-21" value="go" style="edgeStyle=orthogonalEdgeStyle;dashed=1;                  endArrow=open;endFill=0;strokeColor=#23445D;labelBackgroundColor=none;fontColor=default;" edge="1" parent="1" source="xIDQLF7F-7SVXorRrshn-8" target="xIDQLF7F-7SVXorRrshn-12">
+          <mxGeometry x="0.1557" relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xIDQLF7F-7SVXorRrshn-22" value="go" style="edgeStyle=orthogonalEdgeStyle;dashed=1;                  endArrow=open;endFill=0;strokeColor=#23445D;labelBackgroundColor=none;fontColor=default;entryX=0.378;entryY=0.021;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="xIDQLF7F-7SVXorRrshn-8" target="xIDQLF7F-7SVXorRrshn-13">
+          <mxGeometry x="-0.2453" relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xIDQLF7F-7SVXorRrshn-23" value="go" style="edgeStyle=orthogonalEdgeStyle;dashed=1;                  endArrow=open;endFill=0;strokeColor=#23445D;labelBackgroundColor=none;fontColor=default;entryX=0.546;entryY=0.003;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.526;exitY=1.002;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="xIDQLF7F-7SVXorRrshn-8" target="xIDQLF7F-7SVXorRrshn-14">
+          <mxGeometry x="-0.4388" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xIDQLF7F-7SVXorRrshn-24" value="주문 수신 (ZMQ SUB)" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#E9190C;fontStyle=1;labelBackgroundColor=none;fontColor=default;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=3;" edge="1" parent="1" source="xIDQLF7F-7SVXorRrshn-2" target="xIDQLF7F-7SVXorRrshn-10">
+          <mxGeometry x="0.815" y="15" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xIDQLF7F-7SVXorRrshn-25" value="RECONNECT / RELOAD / REPORT" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#23445D;labelBackgroundColor=none;fontColor=default;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="xIDQLF7F-7SVXorRrshn-3" target="xIDQLF7F-7SVXorRrshn-15">
+          <mxGeometry x="-1" y="-61" relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="20" y="955" />
+              <mxPoint x="20" y="210" />
+            </Array>
+            <mxPoint x="50" y="26" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xIDQLF7F-7SVXorRrshn-26" value="NValue (TCP REP)" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#23445D;labelBackgroundColor=none;fontColor=default;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="xIDQLF7F-7SVXorRrshn-4" target="xIDQLF7F-7SVXorRrshn-16">
+          <mxGeometry x="-0.1111" y="-40" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xIDQLF7F-7SVXorRrshn-27" value="IPCSEQ / IPCCHE&#xa;IPCHOGA / IPCFDS" style="edgeStyle=orthogonalEdgeStyle;                  exitX=1;exitY=0.4;exitDx=0;exitDy=0;                  entryX=0;entryY=0.4;entryDx=0;entryDy=0;                  strokeColor=#9673a6;fontStyle=1;labelBackgroundColor=none;strokeColor=#23445D;fontColor=default;" edge="1" parent="1" source="xIDQLF7F-7SVXorRrshn-10" target="xIDQLF7F-7SVXorRrshn-9">
+          <mxGeometry x="0.2687" y="20" relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="370" y="375" />
+              <mxPoint x="370" y="375" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xIDQLF7F-7SVXorRrshn-28" value="CHANGEDATE / STOP" style="edgeStyle=orthogonalEdgeStyle;                  exitX=0;exitY=0.7;exitDx=0;exitDy=0;                  entryX=1;entryY=0.75;entryDx=0;entryDy=0;                  strokeColor=#FF8000;fontStyle=1;labelBackgroundColor=none;strokeColor=#23445D;fontColor=default;" edge="1" parent="1" source="xIDQLF7F-7SVXorRrshn-9" target="xIDQLF7F-7SVXorRrshn-10">
+          <mxGeometry x="-0.0082" y="16" relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="320" y="399" />
+              <mxPoint x="320" y="399" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xIDQLF7F-7SVXorRrshn-29" value="IPCCHE / IPCSEQ / IPCERR&#xa;IPCCANCEL / IPCMKDONE" style="edgeStyle=orthogonalEdgeStyle;                  exitX=1;exitY=0.3;exitDx=0;exitDy=0;                  strokeColor=#FF8000;fontStyle=1;labelBackgroundColor=none;strokeColor=#23445D;fontColor=default;entryX=0.006;entryY=0.443;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="xIDQLF7F-7SVXorRrshn-9" target="xIDQLF7F-7SVXorRrshn-11">
+          <mxGeometry x="0.6024" y="43" relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="510" y="237" />
+            </Array>
+            <mxPoint x="-40" y="26" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xIDQLF7F-7SVXorRrshn-30" value="IPCCURR / IPCHOGA" style="edgeStyle=orthogonalEdgeStyle;                  exitX=1;exitY=0.5;exitDx=0;exitDy=0;                  strokeColor=#FF8000;fontStyle=1;labelBackgroundColor=none;strokeColor=#23445D;fontColor=default;" edge="1" parent="1" source="xIDQLF7F-7SVXorRrshn-9" target="xIDQLF7F-7SVXorRrshn-12">
+          <mxGeometry y="-35" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xIDQLF7F-7SVXorRrshn-31" value="IPCFDS" style="edgeStyle=orthogonalEdgeStyle;                  exitX=1;exitY=0.75;exitDx=0;exitDy=0;                  strokeColor=#FF8000;fontStyle=1;labelBackgroundColor=none;strokeColor=#23445D;fontColor=default;" edge="1" parent="1" source="xIDQLF7F-7SVXorRrshn-9" target="xIDQLF7F-7SVXorRrshn-13">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="450" y="545" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xIDQLF7F-7SVXorRrshn-32" value="IPCCURR" style="edgeStyle=orthogonalEdgeStyle;                  exitX=0;exitY=0.5;exitDx=0;exitDy=0;                  entryX=1;entryY=0.3;entryDx=0;entryDy=0;                  strokeColor=#82b366;fontStyle=1;labelBackgroundColor=none;strokeColor=#23445D;fontColor=default;" edge="1" parent="1" source="xIDQLF7F-7SVXorRrshn-11" target="xIDQLF7F-7SVXorRrshn-9">
+          <mxGeometry x="-0.3192" y="-20" relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="570" y="371" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xIDQLF7F-7SVXorRrshn-33" value="CHANGEDATE" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#23445D;fontStyle=1;labelBackgroundColor=none;fontColor=default;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="xIDQLF7F-7SVXorRrshn-14" target="xIDQLF7F-7SVXorRrshn-9">
+          <mxGeometry x="0.0423" y="8" relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="460" y="275" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xIDQLF7F-7SVXorRrshn-34" value="DBCHE / DBSEQ / DBERR&#xa;DBCANCEL / MKDONE (ZMQ PUB)" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#23445D;fontStyle=1;labelBackgroundColor=none;fontColor=default;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="xIDQLF7F-7SVXorRrshn-11" target="xIDQLF7F-7SVXorRrshn-5">
+          <mxGeometry x="0.8931" y="-20" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xIDQLF7F-7SVXorRrshn-35" value="현재가 / 호가 JSON (ZMQ PUB)" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#23445D;labelBackgroundColor=none;fontColor=default;exitX=0.859;exitY=1.004;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="xIDQLF7F-7SVXorRrshn-12" target="xIDQLF7F-7SVXorRrshn-6">
+          <mxGeometry x="0.8641" y="13" relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="701" y="530" />
+              <mxPoint x="700" y="530" />
+              <mxPoint x="700" y="638" />
+              <mxPoint x="557" y="638" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xIDQLF7F-7SVXorRrshn-36" value="PAUSE 신호" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#23445D;labelBackgroundColor=none;fontColor=default;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="xIDQLF7F-7SVXorRrshn-16" target="xIDQLF7F-7SVXorRrshn-7">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="410" y="545" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xIDQLF7F-7SVXorRrshn-37" value="범례" style="text;html=1;strokeColor=none;fillColor=none;                  align=left;fontStyle=1;fontSize=12;labelBackgroundColor=none;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="570" y="1015" width="60" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="xIDQLF7F-7SVXorRrshn-38" value="- - → 고루틴 생성 (go)" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;labelBackgroundColor=none;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="570" y="1040" width="180" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="xIDQLF7F-7SVXorRrshn-39" value="──→ ZMQ 메시지 흐름" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;labelBackgroundColor=none;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="570" y="1060" width="180" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="xIDQLF7F-7SVXorRrshn-40" value="🟡 InnerProxy = inproc:// PUB/SUB 허브" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;labelBackgroundColor=none;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="560" y="1080" width="240" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="sPjqFiTo_2t9WP84_VWd-2" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;strokeColor=#3A5431;fontColor=#ffffff;fillColor=#6d8764;" vertex="1" parent="1">
+          <mxGeometry x="563" y="1130" width="12" height="12" as="geometry" />
+        </mxCell>
+        <mxCell id="sPjqFiTo_2t9WP84_VWd-3" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;strokeColor=#432D57;fontColor=#ffffff;fillColor=#76608a;" vertex="1" parent="1">
+          <mxGeometry x="563" y="1110" width="12" height="12" as="geometry" />
+        </mxCell>
+        <mxCell id="sPjqFiTo_2t9WP84_VWd-6" value="&amp;nbsp;외부 Proxy" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontColor=#000000;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="570" y="1121" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="sPjqFiTo_2t9WP84_VWd-7" value="처리 Process" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontColor=#000000;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="570" y="1101" width="90" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="gofCoinMatching 플로우" id="faYkqfLJKI7f15vfOAyb">
+    <mxGraphModel dx="1081" dy="719" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="f_start" value="START&#xa;gofCoinMatching(symbol)" style="ellipse;whiteSpace=wrap;html=1;                  fillColor=#d5e8d4;strokeColor=#FFFFFF;fontStyle=1;labelBackgroundColor=none;fillColor=#182E3E;fontColor=#FFFFFF;" parent="1" vertex="1">
+          <mxGeometry x="255" y="40" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="f_init" value="소켓 초기화&#xa;• SUB  → BEFOREMATCHING Proxy (Connect)&#xa;• PUB  → InnerProxy  inproc:// (Connect)&#xa;• SUB  → InnerProxy  inproc:// (Connect)&#xa;• LoadMEMCOIN(symbol)  메모리파일 매핑" style="rounded=1;whiteSpace=wrap;html=1;                  fillColor=#fff2cc;strokeColor=#FFFFFF;align=center;                  spacingLeft=6;fontSize=11;labelBackgroundColor=none;fillColor=#182E3E;fontColor=#FFFFFF;" parent="1" vertex="1">
+          <mxGeometry x="180" y="119" width="370" height="81" as="geometry" />
+        </mxCell>
+        <mxCell id="f_sub" value="구독 설정 (SetSubscribe)&#xa;• orderSub.SetSubscribe(symbol)  — 주문&#xa;• innerSub.SetSubscribe(CHANGEDATE)&#xa;• innerSub.SetSubscribe(STOP)" style="rounded=1;whiteSpace=wrap;html=1;                  fillColor=#fff2cc;strokeColor=#FFFFFF;align=center;                  spacingLeft=6;fontSize=11;labelBackgroundColor=none;fillColor=#182E3E;fontColor=#FFFFFF;" parent="1" vertex="1">
+          <mxGeometry x="180" y="218" width="370" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="f_event" value="GoEvent Poller 등록&#xa;• event.AddZmqClient(orderSub, OrderHandler)&#xa;• event.AddZmqClient(innerSub, InnerControlProcess)&#xa;• event.GoEventLoop()  — 이벤트 루프 시작" style="rounded=1;whiteSpace=wrap;html=1;                  fillColor=#fff2cc;strokeColor=#FFFFFF;align=center;                  spacingLeft=6;fontSize=11;labelBackgroundColor=none;fillColor=#182E3E;fontColor=#FFFFFF;" parent="1" vertex="1">
+          <mxGeometry x="180" y="315" width="370" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="f_poll" value="POLL 대기&#xa;(zmq.Poller)" style="rhombus;whiteSpace=wrap;html=1;                  fillColor=#dae8fc;strokeColor=#FFFFFF;                  fontStyle=1;fontSize=11;labelBackgroundColor=none;fillColor=#182E3E;fontColor=#FFFFFF;" parent="1" vertex="1">
+          <mxGeometry x="255" y="410" width="220" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="f_ord_evt" value="orderSub 이벤트?" style="rhombus;whiteSpace=wrap;html=1;                  fillColor=#ffe6cc;strokeColor=#FFFFFF;fontSize=11;labelBackgroundColor=none;fillColor=#182E3E;fontColor=#FFFFFF;" parent="1" vertex="1">
+          <mxGeometry x="197" y="503" width="180" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="f_inner_evt" value="innerSub 이벤트?" style="rhombus;whiteSpace=wrap;html=1;                  fillColor=#ffe6cc;strokeColor=#FFFFFF;fontSize=11;labelBackgroundColor=none;fillColor=#182E3E;fontColor=#FFFFFF;" parent="1" vertex="1">
+          <mxGeometry x="610" y="520" width="180" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="f_ordnum" value="OrdNum 할당&#xa;(Snowflake ID 생성)" style="rounded=1;whiteSpace=wrap;html=1;                  fillColor=#e1d5e7;strokeColor=#FFFFFF;fontSize=11;labelBackgroundColor=none;fillColor=#182E3E;fontColor=#FFFFFF;" parent="1" vertex="1">
+          <mxGeometry x="192" y="595" width="190" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="f_ipcseq" value="PUB → InnerProxy&#xa;topic: IPCSEQ  (주문번호)" style="rounded=1;whiteSpace=wrap;html=1;                  fillColor=#e1d5e7;strokeColor=#FFFFFF;fontSize=11;labelBackgroundColor=none;fillColor=#182E3E;fontColor=#FFFFFF;" parent="1" vertex="1">
+          <mxGeometry x="192" y="664" width="190" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="f_ipcfds" value="PUB → InnerProxy&#xa;topic: IPCFDS  (FDS 데이터)" style="rounded=1;whiteSpace=wrap;html=1;                  fillColor=#e1d5e7;strokeColor=#FFFFFF;fontSize=11;labelBackgroundColor=none;fillColor=#182E3E;fontColor=#FFFFFF;" parent="1" vertex="1">
+          <mxGeometry x="192" y="732" width="190" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="f_ordtype" value="주문 타입?" style="rhombus;whiteSpace=wrap;html=1;                  fillColor=#ffe6cc;strokeColor=#FFFFFF;fontSize=11;labelBackgroundColor=none;fillColor=#182E3E;fontColor=#FFFFFF;" parent="1" vertex="1">
+          <mxGeometry x="207" y="803" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="f_cancel" value="CancelOrder()&#xa;취소 처리" style="rounded=1;whiteSpace=wrap;html=1;                  fillColor=#f8cecc;strokeColor=#FFFFFF;fontSize=11;labelBackgroundColor=none;fillColor=#182E3E;fontColor=#FFFFFF;" parent="1" vertex="1">
+          <mxGeometry x="87" y="905" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="f_limit" value="LimitOrder()&#xa;지정가 매칭" style="rounded=1;whiteSpace=wrap;html=1;                  fillColor=#f8cecc;strokeColor=#FFFFFF;fontSize=11;labelBackgroundColor=none;fillColor=#182E3E;fontColor=#FFFFFF;" parent="1" vertex="1">
+          <mxGeometry x="227" y="905" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="f_market" value="MarketOrder()&#xa;시장가 매칭" style="rounded=1;whiteSpace=wrap;html=1;                  fillColor=#f8cecc;strokeColor=#FFFFFF;fontSize=11;labelBackgroundColor=none;fillColor=#182E3E;fontColor=#FFFFFF;" parent="1" vertex="1">
+          <mxGeometry x="367" y="905" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="f_ipcche" value="체결 발생 시&#xa;PUB → InnerProxy&#xa;topic: IPCCHE  (체결 데이터)&#xa;topic: IPCCANCEL / IPCERR / IPCMKDONE" style="rounded=1;whiteSpace=wrap;html=1;                  fillColor=#e1d5e7;strokeColor=#FFFFFF;                  align=left;spacingLeft=6;fontSize=11;labelBackgroundColor=none;fillColor=#182E3E;fontColor=#FFFFFF;" parent="1" vertex="1">
+          <mxGeometry x="157" y="1001" width="260" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="f_ipchoga" value="PUB → InnerProxy&#xa;topic: IPCHOGA  (호가 갱신)" style="rounded=1;whiteSpace=wrap;html=1;                  fillColor=#e1d5e7;strokeColor=#FFFFFF;fontSize=11;labelBackgroundColor=none;fillColor=#182E3E;fontColor=#FFFFFF;" parent="1" vertex="1">
+          <mxGeometry x="192" y="1103" width="190" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="f_chgdate" value="CHANGEDATE?" style="rhombus;whiteSpace=wrap;html=1;                  fillColor=#ffe6cc;strokeColor=#FFFFFF;fontSize=11;labelBackgroundColor=none;fillColor=#182E3E;fontColor=#FFFFFF;" parent="1" vertex="1">
+          <mxGeometry x="610" y="645" width="180" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="f_reload" value="LoadMEMCOIN()&#xa;메모리파일 재매핑" style="rounded=1;whiteSpace=wrap;html=1;                  fillColor=#e1d5e7;strokeColor=#FFFFFF;fontSize=11;labelBackgroundColor=none;fillColor=#182E3E;fontColor=#FFFFFF;" parent="1" vertex="1">
+          <mxGeometry x="610" y="771" width="180" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="f_stop" value="STOP?" style="rhombus;whiteSpace=wrap;html=1;                  fillColor=#ffe6cc;strokeColor=#FFFFFF;fontSize=11;labelBackgroundColor=none;fillColor=#182E3E;fontColor=#FFFFFF;" parent="1" vertex="1">
+          <mxGeometry x="424" y="645" width="150" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="f_end" value="END&#xa;고루틴 종료" style="ellipse;whiteSpace=wrap;html=1;                  fillColor=#f8cecc;strokeColor=#FFFFFF;fontStyle=1;labelBackgroundColor=none;fillColor=#182E3E;fontColor=#FFFFFF;" parent="1" vertex="1">
+          <mxGeometry x="429" y="775" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ef1" style="edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=none;strokeColor=#23445D;fontColor=default;" parent="1" source="f_start" target="f_init" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ef2" style="edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=none;strokeColor=#23445D;fontColor=default;" parent="1" source="f_init" target="f_sub" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ef3" style="edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=none;strokeColor=#23445D;fontColor=default;" parent="1" source="f_sub" target="f_event" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ef4" style="edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=none;strokeColor=#23445D;fontColor=default;" parent="1" source="f_event" target="f_poll" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ef5" value="orderSub" style="edgeStyle=orthogonalEdgeStyle;exitX=0.5;exitY=1;labelBackgroundColor=none;strokeColor=#23445D;fontColor=default;exitDx=0;exitDy=0;" parent="1" source="f_poll" target="f_ord_evt" edge="1">
+          <mxGeometry x="-0.011" y="10" relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="287" y="490" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ef6" value="innerSub" style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;labelBackgroundColor=none;strokeColor=#23445D;fontColor=default;" parent="1" source="f_poll" target="f_inner_evt" edge="1">
+          <mxGeometry x="0.7966" y="-30" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ef7" value="Yes" style="edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=none;strokeColor=#23445D;fontColor=default;" parent="1" source="f_ord_evt" target="f_ordnum" edge="1">
+          <mxGeometry x="-0.0909" y="30" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ef8" value="No" style="edgeStyle=orthogonalEdgeStyle;exitX=0;exitY=0.5;labelBackgroundColor=none;strokeColor=#23445D;fontColor=default;exitDx=0;exitDy=0;" parent="1" source="f_ord_evt" target="f_poll" edge="1">
+          <mxGeometry x="-0.2501" y="-10" relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="197" y="540" />
+              <mxPoint x="100" y="540" />
+              <mxPoint x="100" y="450" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ef9" value="Yes" style="edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=none;strokeColor=#23445D;fontColor=default;" parent="1" source="f_inner_evt" target="f_chgdate" edge="1">
+          <mxGeometry x="-0.2726" y="-10" relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="700" y="610" />
+              <mxPoint x="700" y="610" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ef10" value="No" style="edgeStyle=orthogonalEdgeStyle;exitX=0;exitY=0.5;labelBackgroundColor=none;strokeColor=#23445D;fontColor=default;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="f_inner_evt" target="f_poll" edge="1">
+          <mxGeometry x="-0.8334" y="-15" relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="530" y="555" />
+              <mxPoint x="530" y="450" />
+            </Array>
+            <mxPoint x="520" y="440" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ef11" style="edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=none;strokeColor=#23445D;fontColor=default;" parent="1" source="f_ordnum" target="f_ipcseq" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ef12" style="edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=none;strokeColor=#23445D;fontColor=default;" parent="1" source="f_ipcseq" target="f_ipcfds" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ef13" style="edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=none;strokeColor=#23445D;fontColor=default;" parent="1" source="f_ipcfds" target="f_ordtype" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ef14" value="Cancel" style="edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=none;strokeColor=#23445D;fontColor=default;" parent="1" source="f_ordtype" target="f_cancel" edge="1">
+          <mxGeometry x="0.5469" y="-9" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ef15" value="Limit" style="edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=none;strokeColor=#23445D;fontColor=default;" parent="1" source="f_ordtype" target="f_limit" edge="1">
+          <mxGeometry x="-0.5625" y="13" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ef16" value="Market" style="edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=none;strokeColor=#23445D;fontColor=default;" parent="1" source="f_ordtype" target="f_market" edge="1">
+          <mxGeometry x="0.5004" y="9" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ef17" style="edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=none;strokeColor=#23445D;fontColor=default;" parent="1" source="f_cancel" target="f_ipcche" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ef18" style="edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=none;strokeColor=#23445D;fontColor=default;" parent="1" source="f_limit" target="f_ipcche" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ef19" style="edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=none;strokeColor=#23445D;fontColor=default;" parent="1" source="f_market" target="f_ipcche" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ef20" style="edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=none;strokeColor=#23445D;fontColor=default;" parent="1" source="f_ipcche" target="f_ipchoga" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ef21" value="다음 주문 대기" style="edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=none;strokeColor=#23445D;fontColor=default;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="f_ipchoga" target="f_poll" edge="1">
+          <mxGeometry x="0.1976" relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="70" y="1128" />
+              <mxPoint x="70" y="450" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ef22" value="Yes" style="edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=none;strokeColor=#23445D;fontColor=default;" parent="1" source="f_chgdate" target="f_reload" edge="1">
+          <mxGeometry x="-0.1071" y="-10" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ef23" value="No" style="edgeStyle=orthogonalEdgeStyle;exitX=0;exitY=0.5;labelBackgroundColor=none;strokeColor=#23445D;fontColor=default;exitDx=0;exitDy=0;" parent="1" source="f_chgdate" target="f_stop" edge="1">
+          <mxGeometry x="0.1111" y="-10" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ef24" value="계속" style="edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=none;strokeColor=#23445D;fontColor=default;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="f_reload" target="f_poll" edge="1">
+          <mxGeometry x="-0.4249" relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="810" y="796" />
+              <mxPoint x="810" y="450" />
+            </Array>
+            <mxPoint x="470" y="490" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ef25" value="Yes" style="edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=none;strokeColor=#23445D;fontColor=default;" parent="1" source="f_stop" target="f_end" edge="1">
+          <mxGeometry x="0.1733" y="-20" relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="500" y="750" />
+              <mxPoint x="500" y="750" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="upTnsdtgyBgpbhuTvwbu-1" value="No" style="edgeStyle=orthogonalEdgeStyle;exitX=0.5;exitY=0;labelBackgroundColor=none;strokeColor=#23445D;fontColor=default;" edge="1" parent="1" source="f_stop" target="f_poll">
+          <mxGeometry x="-0.5833" y="20" relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="500" y="645" />
+              <mxPoint x="500" y="450" />
+            </Array>
+            <mxPoint x="565" y="640" as="sourcePoint" />
+            <mxPoint x="490" y="470" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="limitOrder" id="D9oOHdqZII-bvIZaDVVl">
+    <mxGraphModel dx="1710" dy="959" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="pg1_0" />
+        <mxCell id="pg1_1" parent="pg1_0" />
+        <mxCell id="pg1_t" value="limitOrder() — 지정가 주문 처리" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontStyle=1;fontSize=20;" parent="pg1_1" vertex="1">
+          <mxGeometry x="130" y="8" width="500" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="pg1_s" value="START&#xa;limitOrder(ipcpub, memcoin, inner, jsonpk)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" parent="pg1_1" vertex="1">
+          <mxGeometry x="270" y="70" width="360" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="pg1_tk" value="taker = &amp;inner.MemData" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="pg1_1" vertex="1">
+          <mxGeometry x="350" y="148.5" width="200" height="38" as="geometry" />
+        </mxCell>
+        <mxCell id="pg1_bs" value="taker.BuySell?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;" parent="pg1_1" vertex="1">
+          <mxGeometry x="370" y="208" width="160" height="68" as="geometry" />
+        </mxCell>
+        <mxCell id="pg1_s_cmp" value="cmp = Compare(Mesu[0].Price, taker.Price)&#xa;매수 1호가 vs 매도 주문가&#xa;-1 : 매수1호가 &lt; 매도가 → 신규등록&#xa;≥0 : 매수1호가 ≥ 매도가 → 매칭" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;spacingLeft=6;fontSize=11;" parent="pg1_1" vertex="1">
+          <mxGeometry x="55" y="340" width="280" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="pg1_s_chk" value="cmp == -1?&#xa;(매수1호가 &lt; 매도가)" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;" parent="pg1_1" vertex="1">
+          <mxGeometry x="110" y="468" width="170" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="pg1_s_new" value="addNewHoga(MEDO, taker)&#xa;신규 매도 호가 등록" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;" parent="pg1_1" vertex="1">
+          <mxGeometry x="28" y="609.5" width="142" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pg1_s_mtch" value="limitMatching(ipcpub, memcoin,&lt;br&gt;  makerMode=&lt;font style=&quot;color: rgb(233, 25, 12);&quot;&gt;MESU&lt;/font&gt;, taker)&lt;br&gt;상세: limitMatching 페이지" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;align=left;spacingLeft=6;" parent="pg1_1" vertex="1">
+          <mxGeometry x="210" y="608.5" width="172" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="pg1_s_zero" value="takerIsZero == false?&#xa;(잔량 있음)" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;" parent="pg1_1" vertex="1">
+          <mxGeometry x="140" y="728" width="160" height="68" as="geometry" />
+        </mxCell>
+        <mxCell id="pg1_s_add" value="addNewHoga(MEDO, taker)&#xa;잔량 매도 호가 등록" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;" parent="pg1_1" vertex="1">
+          <mxGeometry x="122.5" y="858" width="195" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="pg1_b_cmp" value="cmp = Compare(Medo[0].Price, taker.Price)&#xa;매도 1호가 vs 매수 주문가&#xa; 1 : 매도1호가 &gt; 매수가 → 신규등록&#xa;≤0 : 매도1호가 ≤ 매수가 → 매칭" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;spacingLeft=6;fontSize=11;" parent="pg1_1" vertex="1">
+          <mxGeometry x="510" y="360" width="240" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="pg1_b_chk" value="cmp == 1?&#xa;(매도1호가 &gt; 매수가)" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;" parent="pg1_1" vertex="1">
+          <mxGeometry x="551.25" y="480" width="157.5" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="pg1_b_new" value="addNewHoga(MESU, taker)&#xa;신규 매수 호가 등록" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;" parent="pg1_1" vertex="1">
+          <mxGeometry x="650" y="608" width="140" height="63" as="geometry" />
+        </mxCell>
+        <mxCell id="pg1_b_mtch" value="limitMatching(ipcpub, memcoin,&lt;br&gt;  makerMode=&lt;font style=&quot;color: rgb(233, 25, 12);&quot;&gt;MEDO&lt;/font&gt;, taker)&lt;br&gt;상세: limitMatching 페이지" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;align=left;spacingLeft=6;" parent="pg1_1" vertex="1">
+          <mxGeometry x="460" y="608.5" width="165" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="pg1_b_zero" value="takerIsZero == false?&#xa;(잔량 있음)" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;" parent="pg1_1" vertex="1">
+          <mxGeometry x="510" y="720" width="170" height="68" as="geometry" />
+        </mxCell>
+        <mxCell id="pg1_b_add" value="addNewHoga(MESU, taker)&#xa;잔량 매수 호가 등록" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;" parent="pg1_1" vertex="1">
+          <mxGeometry x="497.5" y="858" width="195" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="pg1_note" value="지정가 매칭 조건&#xa;매도: 매수1호가 &gt;= taker.Price 이면 매칭&#xa;매수: 매도1호가 &lt;= taker.Price 이면 매칭&#xa;매칭 후 잔량 있으면 호가에 신규 등록" style="text;html=1;strokeColor=#82b366;fillColor=#d5e8d4;align=left;spacingLeft=6;fontSize=10;rounded=1;" parent="pg1_1" vertex="1">
+          <mxGeometry x="35" y="121.5" width="235" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="pg1_en" value="END / return" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;" parent="pg1_1" vertex="1">
+          <mxGeometry x="280" y="1030" width="170" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="pg1_e1" style="edgeStyle=orthogonalEdgeStyle;" parent="pg1_1" source="pg1_s" target="pg1_tk" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg1_e2" style="edgeStyle=orthogonalEdgeStyle;" parent="pg1_1" source="pg1_tk" target="pg1_bs" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg1_e3" value="매도" style="edgeStyle=orthogonalEdgeStyle;exitX=0;exitY=0.5;" parent="pg1_1" source="pg1_bs" target="pg1_s_cmp" edge="1">
+          <mxGeometry x="0.7802" y="-5" relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="195" y="242" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pg1_e4" value="매수" style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="pg1_1" source="pg1_bs" target="pg1_b_cmp" edge="1">
+          <mxGeometry x="0.5413" relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="630" y="242" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pg1_e5" style="edgeStyle=orthogonalEdgeStyle;" parent="pg1_1" source="pg1_s_cmp" target="pg1_s_chk" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg1_e6" value="Yes" style="edgeStyle=orthogonalEdgeStyle;exitX=0;exitY=0.5;" parent="pg1_1" source="pg1_s_chk" target="pg1_s_new" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg1_e7" value="No" style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;" parent="pg1_1" source="pg1_s_chk" target="pg1_s_mtch" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg1_e8" style="edgeStyle=orthogonalEdgeStyle;" parent="pg1_1" source="pg1_s_mtch" target="pg1_s_zero" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg1_e9" value="Yes" style="edgeStyle=orthogonalEdgeStyle;" parent="pg1_1" source="pg1_s_zero" target="pg1_s_add" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg1_e10" value="No" style="edgeStyle=orthogonalEdgeStyle;exitX=0;exitY=0.5;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="pg1_1" source="pg1_s_zero" target="pg1_en" edge="1">
+          <mxGeometry x="-0.929" y="8" relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="90" y="762" />
+              <mxPoint x="90" y="1000" />
+              <mxPoint x="365" y="1000" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pg1_e11" style="edgeStyle=orthogonalEdgeStyle;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="pg1_1" source="pg1_s_new" target="pg1_en" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="90" y="1000" />
+              <mxPoint x="365" y="1000" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pg1_e12" style="edgeStyle=orthogonalEdgeStyle;" parent="pg1_1" source="pg1_s_add" target="pg1_en" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="319" y="1000" />
+              <mxPoint x="655" y="1000" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pg1_e13" style="edgeStyle=orthogonalEdgeStyle;" parent="pg1_1" source="pg1_b_cmp" target="pg1_b_chk" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg1_e14" value="Yes" style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;" parent="pg1_1" source="pg1_b_chk" target="pg1_b_new" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg1_e15" value="No" style="edgeStyle=orthogonalEdgeStyle;exitX=0;exitY=0.5;" parent="pg1_1" source="pg1_b_chk" target="pg1_b_mtch" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg1_e16" style="edgeStyle=orthogonalEdgeStyle;" parent="pg1_1" source="pg1_b_mtch" target="pg1_b_zero" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg1_e17" value="Yes" style="edgeStyle=orthogonalEdgeStyle;" parent="pg1_1" source="pg1_b_zero" target="pg1_b_add" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg1_e18" value="No" style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="pg1_1" source="pg1_b_zero" target="pg1_en" edge="1">
+          <mxGeometry x="-0.9168" y="-6" relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="760" y="754" />
+              <mxPoint x="760" y="1000" />
+              <mxPoint x="365" y="1000" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pg1_e19" style="edgeStyle=orthogonalEdgeStyle;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="pg1_1" source="pg1_b_new" target="pg1_en" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="760" y="1000" />
+              <mxPoint x="365" y="1000" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pg1_e20" style="edgeStyle=orthogonalEdgeStyle;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="pg1_1" source="pg1_b_add" target="pg1_en" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="595" y="1000" />
+              <mxPoint x="365" y="1000" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="limitMatching" id="oXZdWEwyO0H7zzwh3PEt">
+    <mxGraphModel dx="1415" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="pg2_0" />
+        <mxCell id="pg2_1" parent="pg2_0" />
+        <mxCell id="pg2_t" value="limitMatching() — 지정가 매칭 내부 루프 상세" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontStyle=1;fontSize=20;" parent="pg2_1" vertex="1">
+          <mxGeometry x="108" y="10" width="600" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_s" value="START&#xa;limitMatching(ipcpub, memcoin, makerMode, taker)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" parent="pg2_1" vertex="1">
+          <mxGeometry x="224" y="46" width="380" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_setup" value="makerHoga = memcoin.Mesu  (makerMode==MESU)&#xa;             memcoin.Medo  (makerMode==MEDO)&#xa;sortFlag = 0,  takerIsZero = false" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;spacingLeft=6;fontSize=11;" parent="pg2_1" vertex="1">
+          <mxGeometry x="274" y="116" width="280" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_obox" value="&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;[ Outer Loop : for idx := range makerHoga ]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#6c8ebf;strokeWidth=3;dashed=1;verticalAlign=top;fontStyle=1;fontSize=11;arcSize=5;align=left;" parent="pg2_1" vertex="1">
+          <mxGeometry x="20" y="307" width="750" height="1703" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_mhoga" value="mHoga = &amp;makerHoga[idx]&#xa;mHoga.InWindow()" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" parent="pg2_1" vertex="1">
+          <mxGeometry x="274" y="194" width="280" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_prc" value="prcComp = Compare(mHoga.Price, taker.Price)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" parent="pg2_1" vertex="1">
+          <mxGeometry x="274" y="258" width="280" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_pchk" value="가격 조건 실패?&#xa;MEDO maker: prcComp==1&#xa;MESU maker: prcComp==-1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;" parent="pg2_1" vertex="1">
+          <mxGeometry x="289" y="314" width="250" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_cnt" value="cnt = mHoga.OrderCount&#xa;(루프 중 변경되므로 고정값 사용)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" parent="pg2_1" vertex="1">
+          <mxGeometry x="274" y="414" width="280" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_ibox" value="&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;[ Inner Loop : for i := 0; i &amp;lt; cnt; i++ ]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#9673a6;strokeWidth=3;dashed=1;verticalAlign=top;fontStyle=1;fontSize=11;arcSize=4;align=left;" parent="pg2_1" vertex="1">
+          <mxGeometry x="30" y="478" width="710" height="1162" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_mkr" value="maker, _ = mHoga.GetOrdPointerByIndex(i)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" parent="pg2_1" vertex="1">
+          <mxGeometry x="274" y="507" width="280" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_maxchk" value="maker.OrdNum == ORDSEQ_MAX?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;" parent="pg2_1" vertex="1">
+          <mxGeometry x="289" y="561" width="250" height="68" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_remcp" value="remcp = Compare(maker.RemQty, taker.RemQty)&#xa;cheqty = calcCheQty(maker, taker, remcp)&#xa;maker.CheSeq++,  taker.CheSeq++" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;spacingLeft=6;fontSize=11;" parent="pg2_1" vertex="1">
+          <mxGeometry x="274" y="654" width="280" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_ipcche" value="PUB -&gt; InnerProxy  topic: IPCCHE&#xa;[ pairkey(Snowflake) | chetime(UnixMicro) | cheqty | maker* | taker* ]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;fontSize=11;" parent="pg2_1" vertex="1">
+          <mxGeometry x="224" y="734" width="380" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_upd" value="BfPrice = maker.Price,  BfTime = chetime&#xa;mHoga.SubSumQty(cheqty)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" parent="pg2_1" vertex="1">
+          <mxGeometry x="274" y="802" width="280" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_rchk" value="remcp != 1?&#xa;(maker.RemQty &lt;= taker.RemQty)" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;" parent="pg2_1" vertex="1">
+          <mxGeometry x="289" y="868" width="250" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_mclr" value="maker.OrdNum = ORDSEQ_MAX&#xa;maker.Margin = 0,  maker.Fee = 0&#xa;mHoga.DecOrderCount()" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;spacingLeft=4;fontSize=11;" parent="pg2_1" vertex="1">
+          <mxGeometry x="90" y="935" width="220" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_occhk" value="OrderCount == 0?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;" parent="pg2_1" vertex="1">
+          <mxGeometry x="98" y="1017" width="205" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_spc" value="SetPrice(MAX_PRICE) MEDO&#xa;SetPrice(MIN_PRICE) MESU&#xa;sortFlag |= SORT_HOGA" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;spacingLeft=4;fontSize=11;" parent="pg2_1" vertex="1">
+          <mxGeometry x="90" y="1103" width="220" height="58" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_soflag" value="sortFlag |= SORT_ORDER" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" parent="pg2_1" vertex="1">
+          <mxGeometry x="108" y="1186" width="185" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_mfee" value="maker 잔량 있음 (maker &gt; taker)&#xa;mg = maker.Price x cheqty&#xa;fe = mg x MAX(MakeRate, TakeRate)&#xa;maker.Margin -= mg&#xa;maker.Fee    -= fe" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;spacingLeft=4;fontSize=11;" parent="pg2_1" vertex="1">
+          <mxGeometry x="482" y="965" width="208" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_mrg" value="합류" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=10;" parent="pg2_1" vertex="1">
+          <mxGeometry x="337" y="1222" width="70" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_tchk" value="remcp != -1?&#xa;(maker.RemQty &gt;= taker.RemQty)" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;" parent="pg2_1" vertex="1">
+          <mxGeometry x="247" y="1300" width="250" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_tiz" value="takerIsZero = true" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;fontSize=11;" parent="pg2_1" vertex="1">
+          <mxGeometry x="535" y="1317" width="150" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_ibrk" value="break inner" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;fontSize=11;" parent="pg2_1" vertex="1">
+          <mxGeometry x="545" y="1371" width="130" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_tbchk" value="taker.BuySell == B?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;" parent="pg2_1" vertex="1">
+          <mxGeometry x="247" y="1396" width="250" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_tfee" value="taker 증거금 차감 (매수 taker):&#xa;mg = taker.Price x cheqty&#xa;fe = mg x MAX(MakeRate, TakeRate)&#xa;taker.Margin -= mg,  taker.Fee -= fe" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;spacingLeft=4;fontSize=11;" parent="pg2_1" vertex="1">
+          <mxGeometry x="262" y="1484" width="220" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_nxti" value="i++ (inner loop 다음 반복)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=3;fontSize=11;" parent="pg2_1" vertex="1">
+          <mxGeometry x="202" y="1582" width="340" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_iend" value="Inner Loop 종료" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1;fontSize=11;" parent="pg2_1" vertex="1">
+          <mxGeometry x="261" y="1650" width="180" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_sochk" value="SORT_ORDER &amp;&amp; count &gt; 0?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;" parent="pg2_1" vertex="1">
+          <mxGeometry x="221" y="1702" width="260" height="68" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_sord" value="mHoga.SortOrder()" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" parent="pg2_1" vertex="1">
+          <mxGeometry x="600" y="1718" width="140" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_tizchk" value="takerIsZero == true?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;" parent="pg2_1" vertex="1">
+          <mxGeometry x="221" y="1803" width="260" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_obrk" value="break outer" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;fontSize=11;" parent="pg2_1" vertex="1">
+          <mxGeometry x="574" y="1818.5" width="130" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_soclr" value="sortFlag &amp;^= SORT_ORDER" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" parent="pg2_1" vertex="1">
+          <mxGeometry x="231" y="1893" width="240" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_nxto" value="idx++ (outer loop 다음 반복)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=3;fontSize=11;" parent="pg2_1" vertex="1">
+          <mxGeometry x="181" y="1952" width="340" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_oend" value="Outer Loop 종료" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1;fontSize=11;" parent="pg2_1" vertex="1">
+          <mxGeometry x="260" y="2030" width="180" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_shchk" value="sortFlag &amp; SORT_HOGA?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;" parent="pg2_1" vertex="1">
+          <mxGeometry x="220" y="2087" width="260" height="53" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_sh" value="memcoin.SortHoga(makerMode)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" parent="pg2_1" vertex="1">
+          <mxGeometry x="570" y="2095.5" width="200" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_sw" value="memcoin.SetWindow(makerMode)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" parent="pg2_1" vertex="1">
+          <mxGeometry x="205" y="2170" width="290" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_ret" value="return takerIsZero" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=12;" parent="pg2_1" vertex="1">
+          <mxGeometry x="250" y="2231" width="200" height="29" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_en" value="END" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;" parent="pg2_1" vertex="1">
+          <mxGeometry x="289" y="2280" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_e1" style="edgeStyle=orthogonalEdgeStyle;" parent="pg2_1" source="pg2_s" target="pg2_setup" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_e2" style="edgeStyle=orthogonalEdgeStyle;" parent="pg2_1" source="pg2_setup" target="pg2_mhoga" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_e3" style="edgeStyle=orthogonalEdgeStyle;" parent="pg2_1" source="pg2_mhoga" target="pg2_prc" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_e4" style="edgeStyle=orthogonalEdgeStyle;" parent="pg2_1" source="pg2_prc" target="pg2_pchk" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_e5" value="Yes(break)" style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;strokeColor=#b85450;" parent="pg2_1" source="pg2_pchk" edge="1">
+          <mxGeometry x="-0.9136" relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="760" y="353" />
+              <mxPoint x="760" y="2050" />
+            </Array>
+            <mxPoint x="440" y="2050" as="targetPoint" />
+            <mxPoint x="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pg2_e6" value="No" style="edgeStyle=orthogonalEdgeStyle;" parent="pg2_1" source="pg2_pchk" target="pg2_cnt" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_e7" style="edgeStyle=orthogonalEdgeStyle;" parent="pg2_1" source="pg2_cnt" target="pg2_mkr" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_e8" style="edgeStyle=orthogonalEdgeStyle;" parent="pg2_1" source="pg2_mkr" target="pg2_maxchk" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_e9" value="Yes(break)" style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;strokeColor=#b85450;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="pg2_1" source="pg2_maxchk" target="pg2_iend" edge="1">
+          <mxGeometry x="-0.883" relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="700" y="595" />
+              <mxPoint x="700" y="1668" />
+            </Array>
+            <mxPoint x="-1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pg2_e10" value="No" style="edgeStyle=orthogonalEdgeStyle;" parent="pg2_1" source="pg2_maxchk" target="pg2_remcp" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_e11" style="edgeStyle=orthogonalEdgeStyle;" parent="pg2_1" source="pg2_remcp" target="pg2_ipcche" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_e12" style="edgeStyle=orthogonalEdgeStyle;" parent="pg2_1" source="pg2_ipcche" target="pg2_upd" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_e13" style="edgeStyle=orthogonalEdgeStyle;" parent="pg2_1" source="pg2_upd" target="pg2_rchk" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_e14" value="Yes" style="edgeStyle=orthogonalEdgeStyle;exitX=0;exitY=0.5;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="pg2_1" source="pg2_rchk" target="pg2_mclr" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="200" y="904" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pg2_e15" value="No" style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;" parent="pg2_1" source="pg2_rchk" target="pg2_mfee" edge="1">
+          <mxGeometry x="-0.6296" y="-4" relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="600" y="904" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pg2_e16" style="edgeStyle=orthogonalEdgeStyle;" parent="pg2_1" source="pg2_mclr" target="pg2_occhk" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_e17" value="Yes" style="edgeStyle=orthogonalEdgeStyle;" parent="pg2_1" source="pg2_occhk" target="pg2_spc" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_e18" value="No" style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;" parent="pg2_1" source="pg2_occhk" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="303" y="1050" />
+              <mxPoint x="330" y="1050" />
+              <mxPoint x="330" y="1204" />
+            </Array>
+            <mxPoint x="290" y="1204" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pg2_e19" style="edgeStyle=orthogonalEdgeStyle;" parent="pg2_1" source="pg2_spc" target="pg2_soflag" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_e20" style="edgeStyle=orthogonalEdgeStyle;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="pg2_1" source="pg2_soflag" target="pg2_mrg" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="190" y="1239" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pg2_e21" style="edgeStyle=orthogonalEdgeStyle;exitX=0.535;exitY=0.98;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="pg2_1" source="pg2_mfee" target="pg2_mrg" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="593" y="1239" />
+            </Array>
+            <mxPoint x="600" y="1100" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pg2_e22" style="edgeStyle=orthogonalEdgeStyle;" parent="pg2_1" source="pg2_mrg" target="pg2_tchk" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_e23" value="Yes" style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;" parent="pg2_1" source="pg2_tchk" target="pg2_tiz" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_e24" style="edgeStyle=orthogonalEdgeStyle;" parent="pg2_1" source="pg2_tiz" target="pg2_ibrk" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_e25" value="No" style="edgeStyle=orthogonalEdgeStyle;" parent="pg2_1" source="pg2_tchk" target="pg2_tbchk" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_e26" value="Yes" style="edgeStyle=orthogonalEdgeStyle;" parent="pg2_1" source="pg2_tbchk" target="pg2_tfee" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_e27" value="No" style="edgeStyle=orthogonalEdgeStyle;exitX=0;exitY=0.5;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="pg2_1" source="pg2_tbchk" target="pg2_nxti" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="247" y="1430" />
+              <mxPoint x="130" y="1430" />
+              <mxPoint x="130" y="1600" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pg2_e28" style="edgeStyle=orthogonalEdgeStyle;" parent="pg2_1" source="pg2_tfee" target="pg2_nxti" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_e29" value="inner loop back" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#FF8000;fontColor=#FF8000;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="pg2_1" source="pg2_nxti" target="pg2_mkr" edge="1">
+          <mxGeometry x="0.8978" y="3" relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="710" y="1600" />
+              <mxPoint x="710" y="527" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pg2_e30" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#b85450;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="pg2_1" source="pg2_ibrk" target="pg2_iend" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="610" y="1668" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pg2_e31" style="edgeStyle=orthogonalEdgeStyle;" parent="pg2_1" source="pg2_iend" target="pg2_sochk" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_e32" value="Yes" style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;" parent="pg2_1" source="pg2_sochk" target="pg2_sord" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_e33" value="No" style="edgeStyle=orthogonalEdgeStyle;" parent="pg2_1" source="pg2_sochk" target="pg2_tizchk" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_e34" style="edgeStyle=orthogonalEdgeStyle;exitX=0.421;exitY=0.955;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="pg2_1" source="pg2_sord" target="pg2_tizchk" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="660" y="1752" />
+              <mxPoint x="660" y="1780" />
+              <mxPoint x="351" y="1780" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pg2_e35" value="Yes(break)" style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;strokeColor=#b85450;" parent="pg2_1" source="pg2_tizchk" target="pg2_obrk" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_e36" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#b85450;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="pg2_1" source="pg2_obrk" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="639" y="2050" />
+              <mxPoint x="440" y="2050" />
+            </Array>
+            <mxPoint x="440" y="2050" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pg2_e37" value="No" style="edgeStyle=orthogonalEdgeStyle;" parent="pg2_1" source="pg2_tizchk" target="pg2_soclr" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_e38" style="edgeStyle=orthogonalEdgeStyle;" parent="pg2_1" source="pg2_soclr" target="pg2_nxto" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_e39" value="outer loop back" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#FF8000;fontColor=#FF8000;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="pg2_1" source="pg2_nxto" target="pg2_mhoga" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="60" y="1970" />
+              <mxPoint x="60" y="218" />
+            </Array>
+            <mxPoint x="180" y="2078" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pg2_e40" style="edgeStyle=orthogonalEdgeStyle;" parent="pg2_1" source="pg2_oend" target="pg2_shchk" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_e41" value="Yes" style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;" parent="pg2_1" source="pg2_shchk" target="pg2_sh" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_e42" value="No" style="edgeStyle=orthogonalEdgeStyle;" parent="pg2_1" source="pg2_shchk" target="pg2_sw" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_e43" style="edgeStyle=orthogonalEdgeStyle;" parent="pg2_1" source="pg2_sh" target="pg2_sw" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="649" y="2193" />
+            </Array>
+            <mxPoint x="570" y="2200" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pg2_e44" style="edgeStyle=orthogonalEdgeStyle;" parent="pg2_1" source="pg2_sw" target="pg2_ret" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg2_e45" style="edgeStyle=orthogonalEdgeStyle;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="pg2_1" source="pg2_ret" target="pg2_en" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="329" y="2351" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="cancelOrder" id="BuTPA89GgqzAN2Q7NLtm">
+    <mxGraphModel dx="2052" dy="1151" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="pg3_0" />
+        <mxCell id="pg3_1" parent="pg3_0" />
+        <mxCell id="pg3_t" value="cancelOrder() — 취소 주문 처리" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontStyle=1;fontSize=20;" parent="pg3_1" vertex="1">
+          <mxGeometry x="134" y="30" width="500" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="pg3_s" value="START&#xa;cancelOrder(ipcpub, memcoin, inner, jsonpk)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" parent="pg3_1" vertex="1">
+          <mxGeometry x="214" y="100" width="380" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="pg3_init" value="cordp = &amp;inner.MemData&#xa;mode = MEDO (BuySell==S) / MESU (BuySell==B)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;align=left;spacingLeft=6;" parent="pg3_1" vertex="1">
+          <mxGeometry x="264" y="166" width="280" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="pg3_lb1" value="Step 1: 호가 찾기" style="text;html=1;strokeColor=none;fillColor=none;fontStyle=1;fontSize=12;" parent="pg3_1" vertex="1">
+          <mxGeometry x="134" y="226" width="100" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="pg3_fhoga" value="orgHoga = memcoin.FindHoga(mode, cordp.Price)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" parent="pg3_1" vertex="1">
+          <mxGeometry x="264" y="226" width="280" height="38" as="geometry" />
+        </mxCell>
+        <mxCell id="pg3_hnil" value="orgHoga == nil?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;" parent="pg3_1" vertex="1">
+          <mxGeometry x="300" y="278" width="208" height="38" as="geometry" />
+        </mxCell>
+        <mxCell id="pg3_err1" value="State=ORD-MA-1&#xa;Message=원주문 호가 없음&#xa;PUB IPCERR(CANCEL)&#xa;return" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;align=left;spacingLeft=6;" parent="pg3_1" vertex="1">
+          <mxGeometry x="574" y="264" width="172" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="pg3_iwin" value="saveWindow = orgHoga.IsWindow&#xa;if !saveWindow: orgHoga.InWindow()" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;align=left;spacingLeft=6;" parent="pg3_1" vertex="1">
+          <mxGeometry x="264" y="334" width="280" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="pg3_lb2" value="Step 2: 원주문 찾기" style="text;html=1;strokeColor=none;fillColor=none;fontStyle=1;fontSize=12;" parent="pg3_1" vertex="1">
+          <mxGeometry x="134" y="396" width="120" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="pg3_find" value="for i := 0; i &lt; orgHoga.Hd.OrderCount; i++ {&#xa;  op, _ = orgHoga.GetOrdPointerByIndex(i)&#xa;  if op.OrdNum == inner.OrgNum { orgp=op; break }&#xa;}" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;align=left;spacingLeft=6;" parent="pg3_1" vertex="1">
+          <mxGeometry x="264" y="396" width="280" height="68" as="geometry" />
+        </mxCell>
+        <mxCell id="pg3_pnil" value="orgp == nil?&#xa;(원주문 없음)" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;" parent="pg3_1" vertex="1">
+          <mxGeometry x="300" y="486" width="208" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="pg3_err2" value="State=ORD-MA-2&#xa;Message=원주문번호 없음&#xa;if !saveWindow: OutWindow()&#xa;PUB IPCERR(CANCEL)&#xa;return" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;align=left;spacingLeft=6;" parent="pg3_1" vertex="1">
+          <mxGeometry x="582" y="468.5" width="172" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="pg3_uidchk" value="orgp.UserId != uid?&#xa;(주문자 불일치)" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;" parent="pg3_1" vertex="1">
+          <mxGeometry x="300" y="556" width="208" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="pg3_err3" value="State=ORD-MA-3&#xa;Message=UserId 불일치&#xa;PUB IPCERR(CANCEL)&#xa;return" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;align=left;spacingLeft=6;" parent="pg3_1" vertex="1">
+          <mxGeometry x="582" y="546" width="172" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="pg3_lb3" value="Step 3: 취소 처리" style="text;html=1;strokeColor=none;fillColor=none;fontStyle=1;fontSize=12;" parent="pg3_1" vertex="1">
+          <mxGeometry x="134" y="616" width="110" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="pg3_set" value="jsonpk.Margin = orgp.Margin (증거금 해소용)&#xa;jsonpk.Fee    = orgp.Fee&#xa;jsonpk.Qty    = orgp.RemQty (취소 수량)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;align=left;spacingLeft=6;" parent="pg3_1" vertex="1">
+          <mxGeometry x="264" y="626" width="280" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pg3_dec" value="orgHoga.DecOrderCount()&#xa;orgHoga.SubSumQty(orgp.RemQty)&#xa;orgp.OrdNum = ORDSEQ_MAX" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;align=left;spacingLeft=6;" parent="pg3_1" vertex="1">
+          <mxGeometry x="264" y="706" width="280" height="58" as="geometry" />
+        </mxCell>
+        <mxCell id="pg3_occhk" value="OrderCount &gt; 0?&#xa;(남은 주문 있음)" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;" parent="pg3_1" vertex="1">
+          <mxGeometry x="300" y="782" width="208" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="pg3_sorto" value="orgHoga.SortOrder()&#xa;주문번호 오름차순" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" parent="pg3_1" vertex="1">
+          <mxGeometry x="74" y="781" width="190" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="pg3_seth" value="SetPrice(MAX_PRICE) MEDO&#xa;SetPrice(MIN_PRICE) MESU&#xa;memcoin.SortHoga(mode)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;align=left;spacingLeft=4;" parent="pg3_1" vertex="1">
+          <mxGeometry x="582" y="776.5" width="172" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="pg3_owin" value="if !saveWindow: orgHoga.OutWindow()" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" parent="pg3_1" vertex="1">
+          <mxGeometry x="264" y="846" width="280" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="pg3_pub" value="jsonpk.State   = 0&#xa;jsonpk.Message = 취소주문이 완료되었습니다&#xa;PUB IPCCANCEL [ jsonstream ]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;fontSize=11;align=left;spacingLeft=6;" parent="pg3_1" vertex="1">
+          <mxGeometry x="284" y="934" width="240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pg3_en" value="END / return" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;" parent="pg3_1" vertex="1">
+          <mxGeometry x="324" y="1012" width="160" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="pg3_e1" style="edgeStyle=orthogonalEdgeStyle;" parent="pg3_1" source="pg3_s" target="pg3_init" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg3_e2" style="edgeStyle=orthogonalEdgeStyle;" parent="pg3_1" source="pg3_init" target="pg3_fhoga" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg3_e3" style="edgeStyle=orthogonalEdgeStyle;" parent="pg3_1" source="pg3_fhoga" target="pg3_hnil" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg3_e4" value="Yes" style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;strokeColor=#b85450;" parent="pg3_1" source="pg3_hnil" target="pg3_err1" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg3_e5" value="No" style="edgeStyle=orthogonalEdgeStyle;" parent="pg3_1" source="pg3_hnil" target="pg3_iwin" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg3_e6" style="edgeStyle=orthogonalEdgeStyle;" parent="pg3_1" source="pg3_iwin" target="pg3_find" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg3_e7" style="edgeStyle=orthogonalEdgeStyle;" parent="pg3_1" source="pg3_find" target="pg3_pnil" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg3_e8" value="Yes" style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;strokeColor=#b85450;" parent="pg3_1" source="pg3_pnil" target="pg3_err2" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg3_e9" value="No" style="edgeStyle=orthogonalEdgeStyle;" parent="pg3_1" source="pg3_pnil" target="pg3_uidchk" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg3_e10" value="Yes" style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;strokeColor=#b85450;" parent="pg3_1" source="pg3_uidchk" target="pg3_err3" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg3_e11" value="No" style="edgeStyle=orthogonalEdgeStyle;" parent="pg3_1" source="pg3_uidchk" target="pg3_set" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg3_e12" style="edgeStyle=orthogonalEdgeStyle;" parent="pg3_1" source="pg3_set" target="pg3_dec" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg3_e13" style="edgeStyle=orthogonalEdgeStyle;" parent="pg3_1" source="pg3_dec" target="pg3_occhk" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg3_e14" value="Yes" style="edgeStyle=orthogonalEdgeStyle;exitX=0;exitY=0.5;" parent="pg3_1" source="pg3_occhk" target="pg3_sorto" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg3_e15" value="No" style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;" parent="pg3_1" source="pg3_occhk" target="pg3_seth" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg3_e16" style="edgeStyle=orthogonalEdgeStyle;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="pg3_1" source="pg3_sorto" target="pg3_owin" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="169" y="864" />
+            </Array>
+            <mxPoint x="184" y="896" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pg3_e17" style="edgeStyle=orthogonalEdgeStyle;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="pg3_1" source="pg3_seth" target="pg3_owin" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="644" y="864" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pg3_e18" style="edgeStyle=orthogonalEdgeStyle;" parent="pg3_1" source="pg3_owin" target="pg3_pub" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg3_e19" style="edgeStyle=orthogonalEdgeStyle;" parent="pg3_1" source="pg3_pub" target="pg3_en" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="marketOrder" id="InOR1GfYVjMh0BLu8xos">
+    <mxGraphModel dx="2052" dy="1151" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="pg4_0" />
+        <mxCell id="pg4_1" parent="pg4_0" />
+        <mxCell id="pg4_t" value="marketOrder() — 시장가 주문 처리" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontStyle=1;fontSize=20;" parent="pg4_1" vertex="1">
+          <mxGeometry x="120" y="8" width="500" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="pg4_s" value="START&#xa;marketOrder(ipcpub, memcoin, inner, jsonpk)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" parent="pg4_1" vertex="1">
+          <mxGeometry x="187.5" y="70" width="360" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="pg4_tk" value="taker = &amp;inner.MemData" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="pg4_1" vertex="1">
+          <mxGeometry x="267.5" y="160" width="200" height="38" as="geometry" />
+        </mxCell>
+        <mxCell id="pg4_note" value="시장가 taker 초기값 (goRecvOrder 설정)&#xa;매수(B): taker.Price=주문금액, taker.Qty=0&#xa;         taker.Margin=주문금액-수수료, taker.Fee=주문금액 x TakeRate&#xa;매도(S): taker.Price=0, taker.Qty=주문수량&#xa;         taker.Margin=0, taker.Fee=0" style="text;html=1;strokeColor=#82b366;fillColor=#d5e8d4;align=left;spacingLeft=6;fontSize=10;rounded=1;" parent="pg4_1" vertex="1">
+          <mxGeometry x="213.75" y="220" width="307.5" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="pg4_opchk" value="상대 호가 없음?&#xa;매도(S): Mesu[0].OrderCount==0&#xa;매수(B): Medo[0].OrderCount==0" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;" parent="pg4_1" vertex="1">
+          <mxGeometry x="217.5" y="320" width="300" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="pg4_err" value="State=ORD-MA-4&#xa;Message=상대호가가 없습니다&#xa;PUB IPCERR(MARKET)&#xa;return" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;align=left;spacingLeft=6;" parent="pg4_1" vertex="1">
+          <mxGeometry x="607.5" y="325" width="205" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="pg4_bs" value="taker.BuySell?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;" parent="pg4_1" vertex="1">
+          <mxGeometry x="287.5" y="430" width="160" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="pg4_smtch" value="marketMatching(ipcpub, memcoin,&#xa;  makerMode=MESU, taker)&#xa;상세: marketMatching 페이지" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;align=left;spacingLeft=6;" parent="pg4_1" vertex="1">
+          <mxGeometry x="72.5" y="506" width="215" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="pg4_szero" value="takerIsZero == false?&#xa;(미체결 잔량 있음)" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;" parent="pg4_1" vertex="1">
+          <mxGeometry x="60.5" y="628" width="239" height="68" as="geometry" />
+        </mxCell>
+        <mxCell id="pg4_smkd" value="jsonpk.Margin = taker.RemQty&#xa;PUB IPCMKDONE(MARKET)&#xa;→ gofAfterFunction wallet 반환" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;align=left;spacingLeft=6;" parent="pg4_1" vertex="1">
+          <mxGeometry x="40" y="758" width="280" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="pg4_bmtch" value="marketMatching(ipcpub, memcoin,&#xa;  makerMode=MEDO, taker)&#xa;상세: marketMatching 페이지" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;align=left;spacingLeft=6;" parent="pg4_1" vertex="1">
+          <mxGeometry x="507.5" y="506" width="215" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="pg4_bzero" value="takerIsZero == false?&#xa;(잔여 증거금 있음)" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;" parent="pg4_1" vertex="1">
+          <mxGeometry x="495.5" y="628" width="239" height="68" as="geometry" />
+        </mxCell>
+        <mxCell id="pg4_bmkd" value="jsonpk.Margin = taker.Margin&#xa;jsonpk.Fee    = taker.Fee&#xa;PUB IPCMKDONE(MARKET)&#xa;→ gofAfterFunction wallet 반환" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;align=left;spacingLeft=6;" parent="pg4_1" vertex="1">
+          <mxGeometry x="482.5" y="758" width="265" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="pg4_en" value="END / return" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;" parent="pg4_1" vertex="1">
+          <mxGeometry x="320" y="1000" width="160" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="pg4_e1" style="edgeStyle=orthogonalEdgeStyle;" parent="pg4_1" source="pg4_s" target="pg4_tk" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg4_e2" style="edgeStyle=orthogonalEdgeStyle;" parent="pg4_1" source="pg4_tk" target="pg4_note" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg4_e3" style="edgeStyle=orthogonalEdgeStyle;" parent="pg4_1" source="pg4_note" target="pg4_opchk" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg4_e4" value="Yes" style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;strokeColor=#b85450;" parent="pg4_1" source="pg4_opchk" target="pg4_err" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg4_e5" value="No" style="edgeStyle=orthogonalEdgeStyle;" parent="pg4_1" source="pg4_opchk" target="pg4_bs" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg4_e6" value="S" style="edgeStyle=orthogonalEdgeStyle;exitX=0;exitY=0.5;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="pg4_1" source="pg4_bs" target="pg4_smtch" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="177.5" y="463" />
+              <mxPoint x="177.5" y="506" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pg4_e7" value="B" style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;" parent="pg4_1" source="pg4_bs" target="pg4_bmtch" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="447.5" y="460" />
+              <mxPoint x="615.5" y="460" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pg4_e8" style="edgeStyle=orthogonalEdgeStyle;" parent="pg4_1" source="pg4_smtch" target="pg4_szero" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg4_e9" value="Yes" style="edgeStyle=orthogonalEdgeStyle;" parent="pg4_1" source="pg4_szero" target="pg4_smkd" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg4_e10" value="No" style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;" parent="pg4_1" source="pg4_szero" target="pg4_en" edge="1">
+          <mxGeometry x="-0.8692" relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="400" y="662" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pg4_e11" style="edgeStyle=orthogonalEdgeStyle;" parent="pg4_1" source="pg4_smkd" target="pg4_en" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="223" y="920" />
+              <mxPoint x="400" y="920" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pg4_e12" style="edgeStyle=orthogonalEdgeStyle;" parent="pg4_1" source="pg4_bmtch" target="pg4_bzero" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg4_e13" value="Yes" style="edgeStyle=orthogonalEdgeStyle;" parent="pg4_1" source="pg4_bzero" target="pg4_bmkd" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg4_e14" value="No" style="edgeStyle=orthogonalEdgeStyle;exitX=0;exitY=0.5;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="pg4_1" source="pg4_bzero" target="pg4_en" edge="1">
+          <mxGeometry x="-0.8249" relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="400" y="662" />
+            </Array>
+            <mxPoint x="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pg4_e15" style="edgeStyle=orthogonalEdgeStyle;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="pg4_1" source="pg4_bmkd" target="pg4_en" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="621" y="920" />
+              <mxPoint x="400" y="920" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="marketMatching" id="AXq5GgEsdmO5RJnwSfTa">
+    <mxGraphModel dx="1466" dy="822" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="pg5_0" />
+        <mxCell id="pg5_1" parent="pg5_0" />
+        <mxCell id="pg5_t" value="marketMatching() — 시장가 매칭 루프 (limitMatching 차이점 강조)" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontStyle=1;fontSize=20;" parent="pg5_1" vertex="1">
+          <mxGeometry x="34" y="10" width="776" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_diff" value="limitMatching 과의 주요 차이점&#xa;[1] 가격 비교 없음. MAX/MIN_PRICE sentinel 로 루프 종료&#xa;[2] 매수(B) taker: 매 MEMHOGA 마다 RemQty 재계산&#xa;    qty = (Margin+Fee) / ((1+TakeRate) x mHoga.Price)&#xa;[3] taker.Price = mHoga.Price  (시장가는 maker 가격 사용)&#xa;[4] 종료 조건: Margin==0 AND Fee==0 → takerIsZero=true" style="text;html=1;strokeColor=#d79b00;fillColor=#fff2cc;align=left;spacingLeft=8;fontSize=11;rounded=1;fontStyle=1;" parent="pg5_1" vertex="1">
+          <mxGeometry x="410" y="2040" width="380" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_s" value="START&#xa;marketMatching(ipcpub, memcoin, makerMode, taker)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" parent="pg5_1" vertex="1">
+          <mxGeometry x="260" y="70" width="380" height="47" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_setup" value="makerHoga = memcoin.Mesu / Medo  (makerMode 기준)&#xa;sortFlag = 0" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" parent="pg5_1" vertex="1">
+          <mxGeometry x="307.5" y="140" width="285" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_obox" value="&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; [ Outer Loop : for idx := range makerHoga ]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#6c8ebf;strokeWidth=2;dashed=1;verticalAlign=top;fontStyle=1;fontSize=11;arcSize=4;align=left;" parent="pg5_1" vertex="1">
+          <mxGeometry x="10" y="200" width="780" height="1590" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_mhoga" value="mHoga = &amp;makerHoga[idx]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" parent="pg5_1" vertex="1">
+          <mxGeometry x="307.5" y="220" width="285" height="38" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_sent" value="[1] mHoga.Price == MAX_PRICE OR MIN_PRICE?&#xa;(limitMatching 과 차이: 가격 비교 아님)" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;" parent="pg5_1" vertex="1">
+          <mxGeometry x="300" y="280" width="300" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_iwin" value="mHoga.InWindow()" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" parent="pg5_1" vertex="1">
+          <mxGeometry x="307.5" y="390" width="285" height="38" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_ibox" value="&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;[ Inner Loop : for i := 0; i &amp;lt; cnt; i++ ]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#9673a6;strokeWidth=2;dashed=1;verticalAlign=top;fontStyle=1;fontSize=11;arcSize=3;align=left;" parent="pg5_1" vertex="1">
+          <mxGeometry x="50" y="466" width="720" height="1304" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_bchk" value="[2] taker.BuySell == B?&#xa;(매수 시장가: RemQty 재계산)" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;" parent="pg5_1" vertex="1">
+          <mxGeometry x="310" y="460" width="280" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_qty" value="[2] RemQty 계산:&#xa;margin = taker.Margin + taker.Fee&#xa;unit   = (1 + TakeRate) x mHoga.Price&#xa;remQty = margin / unit  (버림)&#xa;정규화: remQty -= (remQty % MinTrade)&#xa;taker.RemQty = remQty" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;spacingLeft=4;fontSize=11;" parent="pg5_1" vertex="1">
+          <mxGeometry x="88" y="535" width="280" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_rzchk" value="taker.RemQty == 0?&#xa;(최소수량 미달)" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;" parent="pg5_1" vertex="1">
+          <mxGeometry x="75" y="660" width="195" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_rzbrk" value="break outer&#xa;(최소수량 미달)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;fontSize=11;" parent="pg5_1" vertex="1">
+          <mxGeometry x="100" y="760" width="145" height="38" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_tprc" value="[3] taker.Price = mHoga.Price  (시장가: maker 가격 사용)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=11;" parent="pg5_1" vertex="1">
+          <mxGeometry x="307.5" y="674.5" width="285" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_cnt" value="cnt = mHoga.OrderCount" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" parent="pg5_1" vertex="1">
+          <mxGeometry x="307.5" y="740" width="285" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_mkr" value="maker, _ = mHoga.GetOrdPointerByIndex(i)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" parent="pg5_1" vertex="1">
+          <mxGeometry x="307.5" y="798" width="285" height="38" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_maxchk" value="maker.OrdNum == ORDSEQ_MAX?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;" parent="pg5_1" vertex="1">
+          <mxGeometry x="310" y="860" width="280" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_remcp" value="remcp = Compare(maker.RemQty, taker.RemQty)&#xa;cheqty = calcCheQty(maker, taker, remcp)&#xa;maker.CheSeq++,  taker.CheSeq++" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;spacingLeft=6;fontSize=11;" parent="pg5_1" vertex="1">
+          <mxGeometry x="307.5" y="940" width="285" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_ipcche" value="PUB -&gt; InnerProxy  topic: IPCCHE&#xa;[ pairkey | chetime | cheqty | maker* | taker* ]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;fontSize=11;" parent="pg5_1" vertex="1">
+          <mxGeometry x="307.5" y="1020" width="285" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_upd" value="BfPrice = maker.Price,  BfTime = chetime&#xa;mHoga.SubSumQty(cheqty)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" parent="pg5_1" vertex="1">
+          <mxGeometry x="307.5" y="1080" width="285" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_swrem" value="switch remcp:" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=11;" parent="pg5_1" vertex="1">
+          <mxGeometry x="385" y="1140" width="130" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_c01" value="case -1 / 0 (maker &lt;= taker):&#xa;maker.OrdNum = ORDSEQ_MAX&#xa;if maker.BuySell==B:&#xa;  maker.Margin=0, maker.Fee=0&#xa;mHoga.DecOrderCount()&#xa;if count==0: SetPrice(MAX/MIN)&#xa;sortFlag |= SORT_ORDER" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;spacingLeft=4;fontSize=11;" parent="pg5_1" vertex="1">
+          <mxGeometry x="88" y="1190" width="240" height="115" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_c1" value="case 1 (maker &gt; taker):&#xa;if maker.BuySell==B:&#xa;  mg = maker.Price x cheqty&#xa;  fe = mg x MAX(Rate)&#xa;  maker.Margin -= mg&#xa;  maker.Fee    -= fe" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;spacingLeft=4;fontSize=11;" parent="pg5_1" vertex="1">
+          <mxGeometry x="520" y="1190" width="200" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_tkfee" value="taker 증거금 차감 (taker.BuySell==B 인 경우):&#xa;mg = taker.Price x cheqty&#xa;fe = mg x taker.TakeRate&#xa;taker.Margin -= mg,  taker.Fee -= fe" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;align=left;spacingLeft=4;fontSize=11;" parent="pg5_1" vertex="1">
+          <mxGeometry x="271" y="1320" width="285" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_rbchk" value="remcp != -1?&#xa;(매칭 종료)" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;" parent="pg5_1" vertex="1">
+          <mxGeometry x="75" y="1420" width="280" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_ibrk" value="break inner" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;fontSize=11;" parent="pg5_1" vertex="1">
+          <mxGeometry x="450" y="1434.5" width="130" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_nxti" value="i++ (inner loop 다음 반복)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=3;fontSize=11;" parent="pg5_1" vertex="1">
+          <mxGeometry x="72.5" y="1510" width="285" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_iend" value="Inner Loop 종료" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1;fontSize=11;" parent="pg5_1" vertex="1">
+          <mxGeometry x="120" y="1566" width="180" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_sochk" value="SORT_ORDER &amp;&amp; count &gt; 0?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;" parent="pg5_1" vertex="1">
+          <mxGeometry x="70" y="1620" width="280" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_sord" value="mHoga.SortOrder()" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" parent="pg5_1" vertex="1">
+          <mxGeometry x="414" y="1634.5" width="160" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_nxto" value="sortFlag &amp;^= SORT_ORDER&#xa;idx++ (outer loop 다음 반복)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=3;fontSize=11;" parent="pg5_1" vertex="1">
+          <mxGeometry x="65" y="1709" width="285" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_oend" value="Outer Loop 종료" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1;fontSize=11;" parent="pg5_1" vertex="1">
+          <mxGeometry x="118" y="1840" width="180" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_shchk" value="sortFlag &amp; SORT_HOGA?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;" parent="pg5_1" vertex="1">
+          <mxGeometry x="69" y="1910" width="280" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_sh" value="memcoin.SortHoga(makerMode)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" parent="pg5_1" vertex="1">
+          <mxGeometry x="397" y="1923" width="200" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_sw" value="memcoin.SetWindow(makerMode)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" parent="pg5_1" vertex="1">
+          <mxGeometry x="64" y="1990" width="285" height="38" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_post" value="[4] 매도(S) 후처리: taker.Margin=taker.RemQty, taker.Fee=0&#xa;takerIsZero = (Margin==0 AND Fee==0)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=11;" parent="pg5_1" vertex="1">
+          <mxGeometry x="34" y="2050" width="345" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_ret" value="return takerIsZero" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=12;" parent="pg5_1" vertex="1">
+          <mxGeometry x="66.5" y="2119" width="285" height="38" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_en" value="END" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;" parent="pg5_1" vertex="1">
+          <mxGeometry x="148.5" y="2180" width="120" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_e1" style="edgeStyle=orthogonalEdgeStyle;" parent="pg5_1" source="pg5_s" target="pg5_setup" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_e2" style="edgeStyle=orthogonalEdgeStyle;" parent="pg5_1" source="pg5_setup" target="pg5_mhoga" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_e3" style="edgeStyle=orthogonalEdgeStyle;" parent="pg5_1" source="pg5_mhoga" target="pg5_sent" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_e4" value="Yes(break)" style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;strokeColor=#b85450;" parent="pg5_1" source="pg5_sent" target="pg5_oend" edge="1">
+          <mxGeometry x="-0.9293" y="-12" relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="810" y="318" />
+              <mxPoint x="810" y="1858" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pg5_e5" value="No" style="edgeStyle=orthogonalEdgeStyle;" parent="pg5_1" source="pg5_sent" target="pg5_iwin" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_e6" style="edgeStyle=orthogonalEdgeStyle;" parent="pg5_1" source="pg5_iwin" target="pg5_bchk" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_e7" value="Yes" style="edgeStyle=orthogonalEdgeStyle;exitX=0;exitY=0.5;entryX=0.46;entryY=0.014;entryDx=0;entryDy=0;entryPerimeter=0;" parent="pg5_1" source="pg5_bchk" target="pg5_qty" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="217" y="495" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pg5_e8" value="No" style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;" parent="pg5_1" source="pg5_bchk" target="pg5_tprc" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="630" y="495" />
+              <mxPoint x="630" y="692" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pg5_e9" style="edgeStyle=orthogonalEdgeStyle;" parent="pg5_1" target="pg5_rzchk" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="180" y="635" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="172" y="635" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pg5_e10" value="Yes" style="edgeStyle=orthogonalEdgeStyle;" parent="pg5_1" source="pg5_rzchk" target="pg5_rzbrk" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_e11" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#b85450;" parent="pg5_1" source="pg5_rzbrk" target="pg5_oend" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="172" y="842" />
+              <mxPoint x="20" y="842" />
+              <mxPoint x="20" y="1858" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pg5_e12" value="No" style="edgeStyle=orthogonalEdgeStyle;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="pg5_1" source="pg5_rzchk" target="pg5_tprc" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="280" y="693" />
+              <mxPoint x="280" y="693" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pg5_e13" style="edgeStyle=orthogonalEdgeStyle;" parent="pg5_1" source="pg5_tprc" target="pg5_cnt" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_e14" style="edgeStyle=orthogonalEdgeStyle;" parent="pg5_1" source="pg5_cnt" target="pg5_mkr" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_e15" style="edgeStyle=orthogonalEdgeStyle;" parent="pg5_1" source="pg5_mkr" target="pg5_maxchk" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_e16" value="Yes(break)" style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;strokeColor=#b85450;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="pg5_1" source="pg5_maxchk" target="pg5_iend" edge="1">
+          <mxGeometry x="-0.9119" y="-18" relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="740" y="892" />
+              <mxPoint x="740" y="1584" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pg5_e17" value="No" style="edgeStyle=orthogonalEdgeStyle;" parent="pg5_1" source="pg5_maxchk" target="pg5_remcp" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_e18" style="edgeStyle=orthogonalEdgeStyle;" parent="pg5_1" source="pg5_remcp" target="pg5_ipcche" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_e19" style="edgeStyle=orthogonalEdgeStyle;" parent="pg5_1" source="pg5_ipcche" target="pg5_upd" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_e20" style="edgeStyle=orthogonalEdgeStyle;" parent="pg5_1" source="pg5_upd" target="pg5_swrem" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_e21" value="-1/0" style="edgeStyle=orthogonalEdgeStyle;exitX=0;exitY=0.5;" parent="pg5_1" source="pg5_swrem" target="pg5_c01" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="208" y="1158" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pg5_e22" value="1" style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;" parent="pg5_1" source="pg5_swrem" target="pg5_c1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="620" y="1158" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pg5_e23" style="edgeStyle=orthogonalEdgeStyle;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="pg5_1" source="pg5_c01" target="pg5_tkfee" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="208" y="1356" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pg5_e24" style="edgeStyle=orthogonalEdgeStyle;" parent="pg5_1" source="pg5_c1" target="pg5_tkfee" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="630" y="1360" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pg5_e25" style="edgeStyle=orthogonalEdgeStyle;" parent="pg5_1" source="pg5_tkfee" target="pg5_rbchk" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_e26" value="Yes(break)" style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;strokeColor=#b85450;" parent="pg5_1" source="pg5_rbchk" target="pg5_ibrk" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_e27" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#b85450;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="pg5_1" source="pg5_ibrk" target="pg5_iend" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="660" y="1452" />
+              <mxPoint x="660" y="1584" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pg5_e28" value="No" style="edgeStyle=orthogonalEdgeStyle;" parent="pg5_1" source="pg5_rbchk" target="pg5_nxti" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_e29" value="inner loop back" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#FF8000;fontColor=#FF8000;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="pg5_1" source="pg5_nxti" target="pg5_mkr" edge="1">
+          <mxGeometry x="0.8714" y="13" relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="760" y="1528" />
+              <mxPoint x="760" y="817" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pg5_e30" style="edgeStyle=orthogonalEdgeStyle;" parent="pg5_1" source="pg5_iend" target="pg5_sochk" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_e31" value="Yes" style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;" parent="pg5_1" source="pg5_sochk" target="pg5_sord" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_e32" value="No" style="edgeStyle=orthogonalEdgeStyle;" parent="pg5_1" source="pg5_sochk" target="pg5_nxto" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_e33" style="edgeStyle=orthogonalEdgeStyle;" parent="pg5_1" source="pg5_sord" target="pg5_nxto" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="494" y="1720" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pg5_e34" value="outer loop back" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#FF8000;fontColor=#FF8000;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="pg5_1" source="pg5_nxto" target="pg5_mhoga" edge="1">
+          <mxGeometry x="0.0155" y="-100" relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="30" y="1732" />
+              <mxPoint x="30" y="239" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pg5_e35" style="edgeStyle=orthogonalEdgeStyle;" parent="pg5_1" source="pg5_oend" target="pg5_shchk" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_e36" value="Yes" style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;" parent="pg5_1" source="pg5_shchk" target="pg5_sh" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_e37" value="No" style="edgeStyle=orthogonalEdgeStyle;" parent="pg5_1" source="pg5_shchk" target="pg5_sw" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_e38" style="edgeStyle=orthogonalEdgeStyle;" parent="pg5_1" source="pg5_sh" target="pg5_sw" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="497" y="2010" />
+              <mxPoint x="431" y="2010" />
+              <mxPoint x="431" y="2009" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pg5_e39" style="edgeStyle=orthogonalEdgeStyle;" parent="pg5_1" source="pg5_sw" target="pg5_post" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_e40" style="edgeStyle=orthogonalEdgeStyle;" parent="pg5_1" source="pg5_post" target="pg5_ret" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pg5_e41" style="edgeStyle=orthogonalEdgeStyle;" parent="pg5_1" source="pg5_ret" target="pg5_en" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

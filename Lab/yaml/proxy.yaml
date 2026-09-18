@@ -1,0 +1,26 @@
+#
+# 설명 TEST 
+#
+
+#PS1-HEAD COMMENT TEST
+PS1: #PS1-LINE COMMENT 
+  comment   : Proxy1
+  proxytype : PUB/SUB
+  front     : tcp://127.0.0.1:32767
+  back      : tcp://127.0.0.1:32767
+  control   : tcp://127.0.0.1:32767
+  capture   : 
+PS2:
+  comment: Proxy2
+  proxytype: PUB/SUB
+  front: tcp://127.0.0.1:32768
+  back: tcp://127.0.0.1:32768
+  control: tcp://127.0.0.1:32768
+  capture: 
+QP1:
+  comment: Proxy3
+  proxytype: REP/REQ
+  front: tcp://127.0.0.1:32768
+  back: tcp://127.0.0.1:32768
+  control: tcp://127.0.0.1:32768
+  capture: tcp://127.0.0.1:32768

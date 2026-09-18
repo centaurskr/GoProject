@@ -1,0 +1,134 @@
+package main
+
+import (
+	"fmt"
+	"os"
+	"sort"
+	"syscall"
+	"unsafe"
+)
+
+// Order struct definition
+type Order struct {
+	OrdSeq  uint64
+	OrdType int32
+	Midx    int32
+	BuySell int32
+	OrdTime int64
+	RegNum  uint64
+	CheSeq  int32
+	Price   [32]byte
+}
+
+// Create or open the memory-mapped file
+func createMapfile(filename string, size int) (*os.File, error) {
+	file, err := os.OpenFile(filename, os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0600)
+	if err != nil {
+		return nil, err
+	}
+
+	// Extend the file to the required size
+	err = file.Truncate(int64(size))
+	if err != nil {
+		file.Close()
+		return nil, err
+	}
+
+	return file, nil
+}
+
+// Attach to the memory-mapped file
+func attachMapfile(filename string, size int) ([]byte, error) {
+	file, err := os.OpenFile(filename, os.O_RDWR, 0600)
+	if err != nil {
+		return nil, err
+	}
+
+	// Map the file into memory
+	data, err := syscall.Mmap(int(file.Fd()), 0, size, syscall.PROT_READ|syscall.PROT_WRITE, syscall.MAP_SHARED)
+	if err != nil {
+		file.Close()
+		return nil, err
+	}
+
+	return data, nil
+}
+
+// Convert the Order struct to a byte slice for writing to mmap
+func orderToBytes(order *Order) []byte {
+	size := unsafe.Sizeof(*order)
+	orderBytes := (*[1 << 30]byte)(unsafe.Pointer(order))[:size:size]
+	return orderBytes
+}
+
+// Convert a byte slice to an Order struct for reading from mmap
+func bytesToOrder(data []byte) *Order {
+	return (*Order)(unsafe.Pointer(&data[0]))
+}
+
+// Calculate offset for nth order in mmap
+func getOrderOffset(index int, orderSize int) int {
+	return index * orderSize
+}
+
+func main() {
+	filename := "ORDER_MAP.MAP"
+	orderSize := int(unsafe.Sizeof(Order{})) // Size of each Order struct
+	numOrders := 5                           // Number of orders to store
+	totalSize := orderSize * numOrders       // Total size of the mmap file
+
+	// Step 1: Create the memory-mapped file
+	file, err := createMapfile(filename, totalSize)
+	if err != nil {
+		fmt.Println("Error creating file:", err)
+		return
+	}
+	defer file.Close()
+	fmt.Printf("===============MAP File : %s==============\n", filename)
+	// Step 2: Attach to the memory-mapped file
+	data, err := attachMapfile(filename, totalSize)
+	if err != nil {
+		fmt.Println("Error attaching mmap:", err)
+		return
+	}
+	defer syscall.Munmap(data) // Unmap when done
+
+	// Step 3: Write multiple orders to mmap
+	for i := 0; i < numOrders; i++ {
+		ord := &Order{
+			OrdSeq:  uint64(numOrders - i), // Reversed for testing sorting
+			OrdType: int32(i + 1),
+			Midx:    int32(i + 1),
+			BuySell: int32(i % 2), // Alternate Buy/Sell
+			OrdTime: 1234567890 + int64(i),
+			RegNum:  56789 + uint64(i),
+			CheSeq:  int32(i + 10),
+		}
+		copy(ord.Price[:], fmt.Sprintf("%d00.%d0", i+1, i)) // Example price
+
+		// Calculate the offset for the ith order
+		offset := getOrderOffset(i, orderSize)
+		copy(data[offset:], orderToBytes(ord))
+	}
+
+	// Step 4: Read all orders from mmap into a slice
+	orders := make([]Order, numOrders)
+	for i := 0; i < numOrders; i++ {
+		offset := getOrderOffset(i, orderSize)
+		orders[i] = *bytesToOrder(data[offset:])
+		fmt.Printf("Order %d: %+v\n", i+1, orders[i])
+	}
+
+	// Step 5: Sort the orders by OrdSeq
+	sort.Slice(orders, func(i, j int) bool {
+		return orders[i].OrdSeq < orders[j].OrdSeq
+	})
+
+	// Step 6: Print the sorted orders
+	fmt.Println("Orders sorted by OrdSeq:")
+	for i, order := range orders {
+		fmt.Printf("Order %d: %+v\n", i+1, order)
+	}
+// TO DO. sync mapfile
+}
+

@@ -1,0 +1,11 @@
+go 1.24.5
+
+use (
+	./Lab
+	./centolib
+	./goClsTbnova
+	./goPlus
+	./goTbmon
+	./goTbnova
+	./goapisvr
+)

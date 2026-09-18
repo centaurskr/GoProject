@@ -1,0 +1,50 @@
+RESP-&{200 OK 200 HTTP/2.0 2 0 map[Allow:[GET, HEAD, OPTIONS] Cf-Cache-Status:[DYNAMIC] Cf-Ray:[972ea84f1bf6fccf-FUK] Content-Type:[application/json] Cross-Origin-Opener-Policy:[same-origin] Date:[Fri, 22 Aug 2025 01:39:37 GMT] Nel:[{"report_to":"heroku-nel","response_headers":["Via"],"max_age":3600,"success_fraction":0.01,"failure_fraction":0.1}] Referrer-Policy:[same-origin] Report-To:[{"group":"heroku-nel","endpoints":[{"url":"https://nel.heroku.com/reports?s=ejHCE8yv73wHI4Rbb8NO4y24FCIJbIAo07fugvqOhrA%3D\u0026sid=1b10b0ff-8a76-4548-befa-353fc6c6c045\u0026ts=1755826777"}],"max_age":3600}] Reporting-Endpoints:[heroku-nel="https://nel.heroku.com/reports?s=ejHCE8yv73wHI4Rbb8NO4y24FCIJbIAo07fugvqOhrA%3D&sid=1b10b0ff-8a76-4548-befa-353fc6c6c045&ts=1755826777"] Server:[cloudflare] Server-Timing:[cfCacheStatus;desc="DYNAMIC" cfEdge;dur=7,cfOrigin;dur=174] Vary:[Cookie, Origin] Via:[2.0 heroku-router] X-Content-Type-Options:[nosniff] X-Frame-Options:[DENY]] 0xc0001cc180 -1 [] false true map[] 0xc00013e000 0xc00055f2c0}
+
+{
+    "Realtime Currency Exchange Rate": {
+        "1. From_Currency Code": "USD",
+        "2. From_Currency Name": "United States Dollar",
+        "3. To_Currency Code": "KRW",
+        "4. To_Currency Name": "South Korean Won",
+        "5. Exchange Rate": "1398.88000000",
+        "6. Last Refreshed": "2025-08-22 01:39:16",
+        "7. Time Zone": "UTC",
+        "8. Bid Price": "1398.82800000",
+        "9. Ask Price": "1398.91000000"
+    }
+}
+
+RESULT-{{USD United States Dollar KRW South Korean Won 1398.88000000 2025-08-22 01:39:16 UTC 1398.82800000 1398.91000000}}
+[1/25][2025-08-22 10:39:37] USD/KRW: 1398.88 (기준: 2025-08-22 10:39:16 KST)
+
+RESP-&{Status:200 OK StatusCode:200 Proto:HTTP/2.0 ProtoMajor:2 ProtoMinor:0 Header:map[Allow:[GET, HEAD, OPTIONS] Cf-Cache-Status:[DYNAMIC] Cf-Ray:[9746faee6cf029dd-FUK] Content-Type:[application/json] Cross-Origin-Opener-Policy:[same-origin] Date:[Mon, 25 Aug 2025 00:30:20 GMT] Nel:[{"report_to":"heroku-nel","response_headers":["Via"],"max_age":3600,"success_fraction":0.01,"failure_fraction":0.1}] Referrer-Policy:[same-origin] Report-To:[{"group":"heroku-nel","endpoints":[{"url":"https://nel.heroku.com/reports?s=GmBFRG03iaKcejm2BlvCu94JeRuj3i8Tx8ApPXBsz%2BI%3D\u0026sid=1b10b0ff-8a76-4548-befa-353fc6c6c045\u0026ts=1756081820"}],"max_age":3600}] Reporting-Endpoints:[heroku-nel="https://nel.heroku.com/reports?s=GmBFRG03iaKcejm2BlvCu94JeRuj3i8Tx8ApPXBsz%2BI%3D&sid=1b10b0ff-8a76-4548-befa-353fc6c6c045&ts=1756081820"] Server:[cloudflare] Server-Timing:[cfCacheStatus;desc="DYNAMIC" cfEdge;dur=11,cfOrigin;dur=179] Vary:[Cookie, Origin] Via:[2.0 heroku-router] X-Content-Type-Options:[nosniff] X-Frame-Options:[DENY]] Body:0xc000191050 ContentLength:-1 TransferEncoding:[] Close:false Uncompressed:true Trailer:map[] Request:0xc00013e000 TLS:0xc000154b40}
+{
+    "Realtime Currency Exchange Rate": {
+        "1. From_Currency Code": "USD",
+        "2. From_Currency Name": "United States Dollar",
+        "3. To_Currency Code": "KRW",
+        "4. To_Currency Name": "South Korean Won",
+        "5. Exchange Rate": "1386.38000000",
+        "6. Last Refreshed": "2025-08-25 00:30:12",
+        "7. Time Zone": "UTC",
+        "8. Bid Price": "1386.32800000",
+        "9. Ask Price": "1386.42400000"
+    }
+}
+RESULT-{
+RealtimeCurrencyExchangeRate:
+	{
+		FromCurrencyCode:USD 
+		FromCurrencyName:United 
+		States Dollar ToCurrencyCode:KRW 
+		ToCurrencyName:South Korean Won 
+		ExchangeRate:1386.38000000 
+		LastRefreshed:2025-08-25 00:30:12 
+		TimeZone:UTC 
+		BidPrice:1386.32800000 
+		AskPrice:1386.42400000
+	}
+}
+
+[1/25][2025-08-25 09:30:20] USD/KRW: 1386.38 (기준: 2025-08-25 09:30:12 KST)
+
