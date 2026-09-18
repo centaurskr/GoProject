@@ -8,7 +8,8 @@ import (
 	"encoding/json"
 	"time"
 )
-// SendCancel은 취소 주문 메시지를 ORDERPASS Proxy에 전송하고 응답을 반환한다.
+// SendCancel은 [y/n] 확인을 받은 뒤 취소 주문 메시지를 ORDERPASS Proxy에 전송하고 응답을 반환한다.
+// 확인이 거부되면(y/Y 이외 입력) 아무것도 전송하지 않고 (nil, nil)을 반환한다.
 func SendCancel(
 	symbol string,
 	itemCode int,
@@ -55,8 +56,10 @@ func SendCancel(
 	var input string
 	fmt.Printf("\n%+v\n", packet)
 	fmt.Printf("전송하겠습니까? [y/n] ")
+	// Scanln은 EOF(비대화형 stdin)뿐 아니라 빈 입력·공백만 입력해도 에러를 반환한다.
+	// 안전을 위해 이 경우도 구분하지 않고 동일하게 에러로 처리해 전체 루프를 중단시킨다.
 	if _, err := fmt.Scanln(&input); err != nil {
-		return nil, fmt.Errorf("확인 입력 실패(비대화형 stdin일 수 있음): %w", err)
+		return nil, fmt.Errorf("확인 입력 실패(비대화형 stdin이거나 빈 입력일 수 있음): %w", err)
 	}
 	if input != "y" && input != "Y"{return nil, nil;}
 
@@ -126,6 +129,8 @@ func main(){
 		msg, err := SendCancel( symbol, itemCode, mkCode, coinCode,
 					buySell, price, userId, ordNum)
 		if err != nil{
+			// 확인 프롬프트 실패(비대화형 stdin 등)는 개별 주문 스킵이 아니라
+			// 전체 중단으로 처리한다 (자동 전송 방지 안전장치 — continue로 바꾸지 말 것).
 			fmt.Printf("%v\n", err)
 			break
 		}
@@ -134,10 +139,9 @@ func main(){
 				userId    , channel   , ordType   , buySell   , price )
 		if msg == nil {
 			fmt.Printf("스킵됨(y/n 확인에서 전송하지 않음)\n\n")
-			time.Sleep(10 * time.Millisecond)
-			continue
+		}else{
+			fmt.Printf("수신:%s\n\n", msg)
 		}
-		fmt.Printf("수신:%s\n\n", msg)
 		time.Sleep(10 * time.Millisecond)
 	} // For Loop
 
