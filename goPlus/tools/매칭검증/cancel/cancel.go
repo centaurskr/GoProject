@@ -52,14 +52,14 @@ func SendCancel(
     stream,err := json.Marshal(packet)
 	if err != nil{return nil, err;}
 
-/*
 	var input string
 	fmt.Printf("\n%+v\n", packet)
-	fmt.Printf("전송하겠습니까? [y/n]")
-	fmt.Scanln(&input)
-	if input == "n" || input == "N"{return nil, nil;}
+	fmt.Printf("전송하겠습니까? [y/n] ")
+	if _, err := fmt.Scanln(&input); err != nil {
+		return nil, fmt.Errorf("확인 입력 실패(비대화형 stdin일 수 있음): %w", err)
+	}
+	if input != "y" && input != "Y"{return nil, nil;}
 
-*/
     req,err := zmq.NewSocket(zmq.REQ)
 	if err != nil{return nil,  err;}
     req.Connect(reqPoint)
@@ -127,11 +127,16 @@ func main(){
 					buySell, price, userId, ordNum)
 		if err != nil{
 			fmt.Printf("%v\n", err)
-			break	
+			break
 		}
 		fmt.Printf("ordnum[%v] symbol[%v] itemcode[%v] mkcode[%v] coincode[%v] userid[%v] channel[%v] ordtype[%v] buysell[%v] price[%v]\n\n",
 				ordNum    , symbol    , itemCode  , mkCode    , coinCode  ,
 				userId    , channel   , ordType   , buySell   , price )
+		if msg == nil {
+			fmt.Printf("스킵됨(y/n 확인에서 전송하지 않음)\n\n")
+			time.Sleep(10 * time.Millisecond)
+			continue
+		}
 		fmt.Printf("수신:%s\n\n", msg)
 		time.Sleep(10 * time.Millisecond)
 	} // For Loop
