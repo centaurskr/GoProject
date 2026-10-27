@@ -19,6 +19,7 @@
 ///            - killAll 실패 시 exit code 1 반환
 ///            - exe 빈 문자열 처리 명시
 ///            - ppid/uid 미파싱 시 명시적 오류 반환
+///            - goTbnova(또는 C버전 tb_nova) 실행 중이면 오류 출력 후 종료 (exit 1)
 ///
 ///          사용법:
 ///            goClsTbnova [options] <table_path>
@@ -33,6 +34,8 @@
 ///          주의:
 ///            goTbnova 가 실행 중일 때는 사용하지 말 것.
 ///            반드시 goTbnova 종료 후에 실행한다.
+///            실행 시 /proc 를 스캔하여 supervisorNames 에 해당하는 프로세스가
+///            있으면 (유저 무관, -n 포함) 오류 메시지를 출력하고 종료한다.
 ///
 /// @date    2026-04-27
 /// @author  Cento
@@ -55,6 +58,17 @@ import (
 
 	"github.com/BurntSushi/toml"
 )
+
+////////////////////////////////////////////////////////////////////////////////
+// 상수 정의
+////////////////////////////////////////////////////////////////////////////////
+
+/// supervisorNames 는 실행 중이면 goClsTbnova 를 거부해야 하는 슈퍼바이저 프로세스명.
+/// /proc/{pid}/comm (최대 15자) 또는 /proc/{pid}/exe basename 과 비교한다.
+var supervisorNames = map[string]bool{
+	"goTbnova": true, ///< Go 버전 슈퍼바이저
+	"tb_nova":  true, ///< C 버전 슈퍼바이저
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 // 타입 정의
@@ -120,7 +134,7 @@ func main() {
   goTbnova 종료 후 독립 실행 중인 관리 대상 프로세스를 탐지하고 종료한다.
   ppid=1 인 프로세스 중 process.toml 에 등록된 것만 대상으로 한다.
 
-  ⚠️  goTbnova 가 실행 중일 때는 사용하지 말 것.
+  ⚠️  goTbnova 가 실행 중이면 오류 메시지를 출력하고 종료한다.
 
 옵션:
   -u <user>   대상 유저명 (기본값: 현재 유저)
@@ -137,7 +151,7 @@ func main() {
 
 종료 코드:
   0  정상 (탐지 없음 포함)
-  1  오류 (인자 오류, 파일 읽기 실패, 시그널 발송 실패)
+  1  오류 (인자 오류, 파일 읽기 실패, 시그널 발송 실패, goTbnova 실행 중)
 
 `)
 	}
@@ -148,6 +162,17 @@ func main() {
 		os.Exit(1)
 	}
 	tablePath := flag.Arg(0)
+
+	/// ── 0. goTbnova 실행 여부 확인 ─────────────────────────────────────
+	/// 실행 중에 정리하면 goTbnova 가 종료된 프로세스를 즉시 재기동하고,
+	/// 이전 기동분의 고아 프로세스와 뒤섞여 상태가 꼬인다.
+	if sups := findSupervisors(); len(sups) > 0 {
+		for _, s := range sups {
+			fmt.Fprintf(os.Stderr, "[ERROR] 슈퍼바이저 실행 중: PID %d (%s)\n", s.pid, s.name)
+		}
+		fmt.Fprintln(os.Stderr, "[ERROR] goTbnova 를 먼저 종료한 뒤 실행하세요. (예: sudo systemctl stop gotbnova.service)")
+		os.Exit(1)
+	}
 
 	/// ── 1. 대상 유저 UID 확인 ────────────────────────────────────────────
 	targetUID, err := resolveUID(optUser)
@@ -324,6 +349,52 @@ func scanProc(targetUID int, managed managedPaths) ([]procInfo, error) {
 		return found[i].pid < found[j].pid
 	})
 	return found, nil
+}
+
+/// supervisorProc 는 findSupervisors() 가 탐지한 슈퍼바이저 프로세스 정보.
+type supervisorProc struct {
+	pid  int    ///< 프로세스 ID
+	name string ///< 매칭된 이름 (comm 또는 exe basename)
+}
+
+/// findSupervisors 는 /proc 를 스캔하여 실행 중인 goTbnova / tb_nova 를 찾는다.
+///
+/// goTbnova 는 systemd 서비스로 다른 유저(root 등)로 실행될 수 있으므로 유저를
+/// 가리지 않는다. /proc/{pid}/exe 는 타 유저 프로세스에 대해 읽기 권한이 없으므로
+/// 누구나 읽을 수 있는 /proc/{pid}/comm 을 우선 비교하고 exe basename 을 보조로 쓴다.
+///
+/// @return  탐지된 슈퍼바이저 목록 (없으면 nil)
+func findSupervisors() []supervisorProc {
+	entries, err := os.ReadDir("/proc")
+	if err != nil {
+		return nil
+	}
+
+	self := os.Getpid()
+	var found []supervisorProc
+
+	for _, entry := range entries {
+		pid, err := strconv.Atoi(entry.Name())
+		if err != nil || pid == self {
+			continue
+		}
+
+		/// 1순위: comm (권한 무관하게 읽기 가능)
+		if data, err := os.ReadFile(fmt.Sprintf("/proc/%d/comm", pid)); err == nil {
+			if name := strings.TrimSpace(string(data)); supervisorNames[name] {
+				found = append(found, supervisorProc{pid: pid, name: name})
+				continue
+			}
+		}
+
+		/// 2순위: exe basename (prctl 등으로 comm 이 바뀐 경우 대비, 동일 유저만 읽힘)
+		if exe, err := os.Readlink(fmt.Sprintf("/proc/%d/exe", pid)); err == nil {
+			if name := filepath.Base(exe); supervisorNames[name] {
+				found = append(found, supervisorProc{pid: pid, name: name})
+			}
+		}
+	}
+	return found
 }
 
 /// readProcInfo 는 /proc/{pid}/ 에서 프로세스 정보를 읽는다.

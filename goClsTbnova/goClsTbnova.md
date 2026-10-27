@@ -214,10 +214,16 @@ fi
 
 ## 주의사항
 
-> **⚠️ goTbnova 실행 중에는 사용하지 말 것**  
-> goTbnova 가 실행 중인 상태에서 goClsTbnova 를 실행하면  
-> 관리 대상 프로세스가 종료되고 goTbnova 가 즉시 재기동을 시도한다.  
-> 반드시 goTbnova 종료 후 사용한다.
+> **⚠️ goTbnova 실행 중에는 실행되지 않음**  
+> goTbnova 가 실행 중인 상태에서 정리하면 관리 대상 프로세스가 종료되고  
+> goTbnova 가 즉시 재기동을 시도한다. 이를 막기 위해 goClsTbnova 는 시작 시  
+> `/proc` 를 스캔하여 `goTbnova`(또는 C버전 `tb_nova`) 프로세스가 있으면  
+> (실행 유저 무관, `-n` 포함) 아래 오류를 출력하고 종료 코드 1 로 끝난다.  
+>
+> ```
+> [ERROR] 슈퍼바이저 실행 중: PID 12300 (goTbnova)
+> [ERROR] goTbnova 를 먼저 종료한 뒤 실행하세요. (예: sudo systemctl stop gotbnova.service)
+> ```
 
 > **ℹ️ ppid=1 조건**  
 > goTbnova 종료 후 자식들의 ppid 가 1 로 변경된다.  
@@ -242,6 +248,7 @@ goTbnova/
 | 버전 | 날짜 | 내용 |
 |---|---|---|
 | 1.0.0 | 2026-04-27 | 최초 작성 |
+| 1.1.0 | 2026-10-27 | goTbnova/tb_nova 실행 중이면 오류 출력 후 종료 |
 
 ---
 
