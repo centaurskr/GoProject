@@ -125,36 +125,7 @@ func main() {
 	flag.BoolVar(&optSIGTERM, "s", false, "SIGKILL 대신 SIGTERM 발송")
 	flag.BoolVar(&optVerbose, "v", false, "상세 출력 (cmdline 전체 표시)")
 
-	flag.Usage = func() {
-		fmt.Fprintf(os.Stderr, `
-사용법:
-  goClsTbnova [options] <table_path>
-
-설명:
-  goTbnova 종료 후 독립 실행 중인 관리 대상 프로세스를 탐지하고 종료한다.
-  ppid=1 인 프로세스 중 process.toml 에 등록된 것만 대상으로 한다.
-
-  ⚠️  goTbnova 가 실행 중이면 오류 메시지를 출력하고 종료한다.
-
-옵션:
-  -u <user>   대상 유저명 (기본값: 현재 유저)
-  -n          dry-run: 목록만 출력, 종료 안함
-  -f          확인 없이 즉시 종료 (SIGKILL)
-  -s          SIGKILL 대신 SIGTERM 발송
-  -v          상세 출력 (cmdline 전체 표시)
-
-예시:
-  goClsTbnova    /home/cento/conf/process.toml          목록 확인 + 확인 후 종료
-  goClsTbnova -n /home/cento/conf/process.toml          dry-run (목록만)
-  goClsTbnova -f /home/cento/conf/process.toml          확인 없이 즉시 종료
-  goClsTbnova -u cento -s /home/cento/conf/process.toml SIGTERM 발송
-
-종료 코드:
-  0  정상 (탐지 없음 포함)
-  1  오류 (인자 오류, 파일 읽기 실패, 시그널 발송 실패, goTbnova 실행 중)
-
-`)
-	}
+	flag.Usage = usage
 	flag.Parse()
 
 	if flag.NArg() != 1 {
@@ -496,6 +467,39 @@ func killAll(procs []procInfo, sig syscall.Signal, sigName string, verbose bool)
 ////////////////////////////////////////////////////////////////////////////////
 // 출력 함수
 ////////////////////////////////////////////////////////////////////////////////
+
+/// usage 는 사용법을 표준에러로 출력한다.
+/// flag.Usage 에 등록되어 -h 또는 인자 오류 시 호출된다.
+func usage() {
+	fmt.Fprintf(os.Stderr, `
+사용법:
+  goClsTbnova [options] <table_path>
+
+설명:
+  goTbnova 종료 후 독립 실행 중인 관리 대상 프로세스를 탐지하고 종료한다.
+  ppid=1 인 프로세스 중 process.toml 에 등록된 것만 대상으로 한다.
+
+  ⚠️  goTbnova 가 실행 중이면 오류 메시지를 출력하고 종료한다.
+
+옵션:
+  -u <user>   대상 유저명 (기본값: 현재 유저)
+  -n          dry-run: 목록만 출력, 종료 안함
+  -f          확인 없이 즉시 종료 (SIGKILL)
+  -s          SIGKILL 대신 SIGTERM 발송
+  -v          상세 출력 (cmdline 전체 표시)
+
+예시:
+  goClsTbnova    /home/cento/conf/process.toml          목록 확인 + 확인 후 종료
+  goClsTbnova -n /home/cento/conf/process.toml          dry-run (목록만)
+  goClsTbnova -f /home/cento/conf/process.toml          확인 없이 즉시 종료
+  goClsTbnova -u cento -s /home/cento/conf/process.toml SIGTERM 발송
+
+종료 코드:
+  0  정상 (탐지 없음 포함)
+  1  오류 (인자 오류, 파일 읽기 실패, 시그널 발송 실패, goTbnova 실행 중)
+
+`)
+}
 
 /// printFound 는 탐지된 프로세스 목록을 출력한다.
 func printFound(procs []procInfo, verbose bool) {
